@@ -1,0 +1,267 @@
+---
+---
+
+<div class="game-wrapper" style="position:relative; width:100%; height:calc(100vh - 4rem);">
+  <canvas id="gol-canvas" style="display:block; width:100%; height:100%; cursor:crosshair;"></canvas>
+
+  <!-- HUD bottom bar -->
+  <div id="hud" style="position:fixed; bottom:0; left:0; right:0; z-index:30; background:rgba(16,16,16,0.92); backdrop-filter:blur(12px); border-top:1px solid #2a2a2a; padding:0.75rem 1.5rem; display:flex; align-items:center; gap:1rem; flex-wrap:wrap;">
+
+    <!-- Controls -->
+    <div style="display:flex; gap:0.5rem; align-items:center;">
+      <button id="btn-play" title="Play" style="width:2.5rem;height:2.5rem;border:1px solid #2a2a2a;background:#1a1a1a;color:#f0f0f0;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:1rem;" onmouseover="this.style.borderColor='#e8ff00';this.style.color='#e8ff00'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#f0f0f0'">
+        ▶
+      </button>
+      <button id="btn-pause" title="Pause" style="width:2.5rem;height:2.5rem;border:1px solid #2a2a2a;background:#1a1a1a;color:#f0f0f0;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:1rem;" onmouseover="this.style.borderColor='#e8ff00';this.style.color='#e8ff00'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#f0f0f0'">
+        ⏸
+      </button>
+      <button id="btn-reset" title="Reset" style="width:2.5rem;height:2.5rem;border:1px solid #2a2a2a;background:#1a1a1a;color:#f0f0f0;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:1rem;" onmouseover="this.style.borderColor='#e8ff00';this.style.color='#e8ff00'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#f0f0f0'">
+        ↺
+      </button>
+      <button id="btn-random" title="Random" style="width:2.5rem;height:2.5rem;border:1px solid #2a2a2a;background:#1a1a1a;color:#f0f0f0;border-radius:3px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-size:1rem;" onmouseover="this.style.borderColor='#e8ff00';this.style.color='#e8ff00'" onmouseout="this.style.borderColor='#2a2a2a';this.style.color='#f0f0f0'">
+        ⚂
+      </button>
+    </div>
+
+    <div style="width:1px;height:2rem;background:#2a2a2a;flex-shrink:0;"></div>
+
+    <!-- Speed -->
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <span style="font-family:'Space Mono',monospace;font-size:0.65rem;color:#888;text-transform:uppercase;letter-spacing:0.1em;white-space:nowrap;">Vitesse</span>
+      <input id="speed-slider" type="range" min="1" max="60" value="10"
+        style="width:90px;accent-color:#e8ff00;cursor:pointer;" />
+      <span id="speed-val" style="font-family:'Space Mono',monospace;font-size:0.7rem;color:#e8ff00;min-width:2.5rem;">10 fps</span>
+    </div>
+
+    <div style="width:1px;height:2rem;background:#2a2a2a;flex-shrink:0;"></div>
+
+    <!-- Stats -->
+    <div style="display:flex;gap:1.25rem;align-items:center;">
+      <div style="display:flex;flex-direction:column;">
+        <span style="font-family:'Space Mono',monospace;font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Génération</span>
+        <span id="gen-count" style="font-family:'Space Mono',monospace;font-size:0.85rem;color:#f0f0f0;font-weight:700;">0</span>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <span style="font-family:'Space Mono',monospace;font-size:0.6rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Cellules</span>
+        <span id="cell-count" style="font-family:'Space Mono',monospace;font-size:0.85rem;color:#e8ff00;font-weight:700;">0</span>
+      </div>
+    </div>
+
+    <!-- Status indicator -->
+    <div style="margin-left:auto;display:flex;align-items:center;gap:0.5rem;">
+      <div id="status-dot" style="width:6px;height:6px;border-radius:50%;background:#888;transition:background 0.3s;"></div>
+      <span id="status-text" style="font-family:'Space Mono',monospace;font-size:0.65rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;">Pause</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById('gol-canvas') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+
+  const CELL_SIZE = 12;
+  let cols = 0, rows = 0;
+  let grid: boolean[][] = [];
+  let nextGrid: boolean[][] = [];
+  let generation = 0;
+  let running = false;
+  let fps = 10;
+  let lastTime = 0;
+  let animId = 0;
+
+  // Ghost/fade arrays for dying cells
+  let ghostGrid: number[][] = [];
+
+  function resize() {
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    const newCols = Math.floor(canvas.width / CELL_SIZE);
+    const newRows = Math.floor(canvas.height / CELL_SIZE);
+
+    const oldGrid = grid;
+    const oldGhost = ghostGrid;
+    grid = Array.from({ length: newRows }, (_, r) =>
+      Array.from({ length: newCols }, (_, c) => oldGrid[r]?.[c] ?? false)
+    );
+    nextGrid = Array.from({ length: newRows }, () => Array(newCols).fill(false));
+    ghostGrid = Array.from({ length: newRows }, (_, r) =>
+      Array.from({ length: newCols }, (_, c) => oldGhost[r]?.[c] ?? 0)
+    );
+    cols = newCols;
+    rows = newRows;
+    draw();
+  }
+
+  function countNeighbors(r: number, c: number): number {
+    let count = 0;
+    for (let dr = -1; dr <= 1; dr++) {
+      for (let dc = -1; dc <= 1; dc++) {
+        if (dr === 0 && dc === 0) continue;
+        const nr = (r + dr + rows) % rows;
+        const nc = (c + dc + cols) % cols;
+        if (grid[nr][nc]) count++;
+      }
+    }
+    return count;
+  }
+
+  function step() {
+    let alive = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const n = countNeighbors(r, c);
+        const wasAlive = grid[r][c];
+        const willLive = wasAlive ? (n === 2 || n === 3) : n === 3;
+        nextGrid[r][c] = willLive;
+        if (willLive) alive++;
+        // ghost: when a cell dies, start fade
+        if (wasAlive && !willLive) {
+          ghostGrid[r][c] = 1.0;
+        } else if (!willLive) {
+          ghostGrid[r][c] = Math.max(0, (ghostGrid[r][c] ?? 0) - 0.15);
+        } else {
+          ghostGrid[r][c] = 0;
+        }
+      }
+    }
+    // swap buffers
+    [grid, nextGrid] = [nextGrid, grid];
+    generation++;
+    document.getElementById('gen-count')!.textContent = generation.toString();
+    document.getElementById('cell-count')!.textContent = alive.toString();
+  }
+
+  function draw() {
+    ctx.fillStyle = '#101010';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const x = c * CELL_SIZE;
+        const y = r * CELL_SIZE;
+        if (grid[r][c]) {
+          ctx.fillStyle = '#e8ff00';
+          ctx.fillRect(x + 1, y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+        } else if (ghostGrid[r][c] > 0.01) {
+          const alpha = ghostGrid[r][c];
+          ctx.fillStyle = `rgba(232,255,0,${alpha * 0.25})`;
+          ctx.fillRect(x + 1, y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
+          ghostGrid[r][c] = Math.max(0, alpha - 0.12);
+        }
+      }
+    }
+  }
+
+  function loop(ts: number) {
+    if (!running) return;
+    const interval = 1000 / fps;
+    if (ts - lastTime >= interval) {
+      step();
+      draw();
+      lastTime = ts;
+    }
+    animId = requestAnimationFrame(loop);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    lastTime = performance.now();
+    animId = requestAnimationFrame(loop);
+    setStatus(true);
+  }
+
+  function pause() {
+    running = false;
+    cancelAnimationFrame(animId);
+    setStatus(false);
+  }
+
+  function reset() {
+    pause();
+    grid = Array.from({ length: rows }, () => Array(cols).fill(false));
+    nextGrid = Array.from({ length: rows }, () => Array(cols).fill(false));
+    ghostGrid = Array.from({ length: rows }, () => Array(cols).fill(0));
+    generation = 0;
+    document.getElementById('gen-count')!.textContent = '0';
+    document.getElementById('cell-count')!.textContent = '0';
+    draw();
+  }
+
+  function randomize() {
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c < cols; c++)
+        grid[r][c] = Math.random() < 0.3;
+    ghostGrid = Array.from({ length: rows }, () => Array(cols).fill(0));
+    generation = 0;
+    draw();
+    updateCellCount();
+  }
+
+  function updateCellCount() {
+    let alive = 0;
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c < cols; c++)
+        if (grid[r][c]) alive++;
+    document.getElementById('cell-count')!.textContent = alive.toString();
+  }
+
+  function setStatus(isRunning: boolean) {
+    const dot = document.getElementById('status-dot')!;
+    const txt = document.getElementById('status-text')!;
+    dot.style.background = isRunning ? '#e8ff00' : '#888';
+    txt.textContent = isRunning ? 'Live' : 'Pause';
+    txt.style.color = isRunning ? '#e8ff00' : '#888';
+  }
+
+  // Mouse drawing
+  let drawing = false;
+  let drawValue = true;
+
+  function getCellCoords(e: MouseEvent | Touch) {
+    const rect = canvas.getBoundingClientRect();
+    const x = (e instanceof Touch ? e.clientX : e.clientX) - rect.left;
+    const y = (e instanceof Touch ? e.clientY : e.clientY) - rect.top;
+    const c = Math.floor(x / CELL_SIZE);
+    const r = Math.floor(y / CELL_SIZE);
+    return { r, c };
+  }
+
+  function paintCell(e: MouseEvent) {
+    const { r, c } = getCellCoords(e);
+    if (r >= 0 && r < rows && c >= 0 && c < cols) {
+      grid[r][c] = drawValue;
+      ghostGrid[r][c] = 0;
+      draw();
+      updateCellCount();
+    }
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    drawing = true;
+    const { r, c } = getCellCoords(e);
+    if (r >= 0 && r < rows && c >= 0 && c < cols)
+      drawValue = !grid[r][c];
+    paintCell(e);
+  });
+  canvas.addEventListener('mousemove', (e) => { if (drawing) paintCell(e); });
+  window.addEventListener('mouseup', () => { drawing = false; });
+
+  // Buttons
+  document.getElementById('btn-play')!.addEventListener('click', start);
+  document.getElementById('btn-pause')!.addEventListener('click', pause);
+  document.getElementById('btn-reset')!.addEventListener('click', reset);
+  document.getElementById('btn-random')!.addEventListener('click', () => { randomize(); });
+
+  const slider = document.getElementById('speed-slider') as HTMLInputElement;
+  const speedVal = document.getElementById('speed-val')!;
+  slider.addEventListener('input', () => {
+    fps = parseInt(slider.value);
+    speedVal.textContent = `${fps} fps`;
+  });
+
+  // Resize
+  const ro = new ResizeObserver(() => resize());
+  ro.observe(canvas);
+  resize();
+</script>

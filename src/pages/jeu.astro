@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GameOfLife from '../components/GameOfLife.astro';
+---
+
+<BaseLayout
+  title="Simulation — Le Jeu de la Vie"
+  description="Simulateur interactif du Jeu de la Vie de John Conway"
+  page="game"
+  noFooter={true}
+>
+  <div style="padding-top:4rem; height:100vh; overflow:hidden; background:#101010;">
+    <GameOfLife />
+  </div>
+</BaseLayout>
+
+<style>
+  body {
+    overflow: hidden;
+  }
+</style>

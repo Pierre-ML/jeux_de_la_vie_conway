@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const patterns = [
+  {
+    nom: 'Glider',
+    categorie: 'Vaisseau',
+    cellules: 5,
+    periode: '4 (se déplace)',
+    description: "Le plus célèbre des patterns mobiles. Découvert par Richard Guy en 1969, le glider se déplace en diagonale à travers la grille, revenant à sa forme initiale toutes les 4 générations. Il est l'« atome » de base pour construire des structures complexes.",
+    impact: "Le glider est si emblématique qu'il est devenu le symbole officieux de la culture hacker. Eric Raymond l'a proposé comme logo de la communauté open source en 2003.",
+    grille: [
+      [0,1,0],
+      [0,0,1],
+      [1,1,1],
+    ],
+  },
+  {
+    nom: 'Blinker',
+    categorie: 'Oscillateur',
+    cellules: 3,
+    periode: '2',
+    description: "L'oscillateur le plus simple du Game of Life. Une ligne de 3 cellules alterne entre orientation horizontale et verticale avec une période de 2. C'est le point de départ pour comprendre les oscillateurs.",
+    impact: "Le blinker démontre que même 3 cellules peuvent créer un comportement périodique stable. On le retrouve fréquemment à la périphérie de patterns complexes en décomposition.",
+    grille: [
+      [0,0,0,0,0],
+      [0,1,1,1,0],
+      [0,0,0,0,0],
+    ],
+  },
+  {
+    nom: 'Block',
+    categorie: 'Still life',
+    cellules: 4,
+    periode: 'Stable',
+    description: "La structure statique la plus simple. Un carré 2×2 de cellules vivantes reste identique à l'infini : chaque cellule a exactement 3 voisines, et les cellules environnantes ont au plus 2 voisines vivantes.",
+    impact: "Les still lifes sont les « rochers » de l'univers du Game of Life. On les retrouve souvent comme résidu final de simulations chaotiques qui se stabilisent.",
+    grille: [
+      [0,0,0,0],
+      [0,1,1,0],
+      [0,1,1,0],
+      [0,0,0,0],
+    ],
+  },
+  {
+    nom: 'Beacon',
+    categorie: 'Oscillateur',
+    cellules: 6,
+    periode: '2',
+    description: "Deux blocs 2×2 se touchant en diagonale par un coin. Ils clignotent en période 2 : deux cellules s'allument et s'éteignent alternativement aux coins du pattern. C'est l'un des oscillateurs de période 2 les plus courants.",
+    impact: "Le beacon illustre parfaitement comment deux structures stables peuvent interagir pour créer un comportement oscillant. Il est souvent utilisé comme signal ou horloge dans des constructions complexes.",
+    grille: [
+      [1,1,0,0],
+      [1,1,0,0],
+      [0,0,1,1],
+      [0,0,1,1],
+    ],
+  },
+  {
+    nom: 'Toad',
+    categorie: 'Oscillateur',
+    cellules: 6,
+    periode: '2',
+    description: "Un oscillateur de période 2 formé de deux rangées de 3 cellules décalées. Sa forme rappelle celle d'un crapaud — d'où son nom. Il est l'un des oscillateurs de période 2 les plus élégants du jeu.",
+    impact: "Le Toad démontre la richesse cachée dans un petit nombre de cellules. Ses deux phases d'oscillation sont très différentes visuellement, ce qui le rend facilement reconnaissable.",
+    grille: [
+      [0,0,0,0,0,0],
+      [0,0,1,1,1,0],
+      [0,1,1,1,0,0],
+      [0,0,0,0,0,0],
+    ],
+  },
+  {
+    nom: 'Gosper Glider Gun',
+    categorie: 'Canon',
+    cellules: 36,
+    periode: '30',
+    description: "Le premier pattern à croissance illimitée découvert, par Bill Gosper en 1970. Il émet un glider toutes les 30 générations, permettant de créer des flux infinis de gliders. Sa découverte a prouvé que la population d'une simulation peut croître sans limite.",
+    impact: "Le Gosper Glider Gun a résolu un problème que Conway avait posé lui-même : peut-on créer un pattern dont la population croît à l'infini ? La réponse est oui, et il en a découlé la preuve de la Turing-complétude du jeu.",
+    grille: [
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+      [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+      [1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [1,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+    ],
+    miniGrille: true,
+  },
+];
+---
+
+<BaseLayout title="Patterns — Le Jeu de la Vie" page="inner">
+
+  <section class="pt-36 pb-24 px-6 md:px-12 max-w-6xl mx-auto">
+
+    <div class="mb-20 fade-in">
+      <a href="/" class="inline-flex items-center gap-2 font-mono text-xs text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors mb-8 uppercase tracking-widest">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 6H2M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Accueil
+      </a>
+      <span class="block font-mono text-xs text-[var(--color-accent)] tracking-widest uppercase mb-4">03 — Patterns</span>
+      <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-6">Structures<br /><span class="text-[var(--color-muted)]">remarquables</span></h1>
+      <p class="text-[var(--color-muted)] text-lg max-w-2xl leading-relaxed">
+        En 55 ans, des milliers de patterns ont été découverts et catalogués. Voici une sélection des plus importants — des oscillateurs aux vaisseaux, des structures statiques aux canons.
+      </p>
+    </div>
+
+    <!-- Catégories -->
+    <div class="fade-in mb-16 flex flex-wrap gap-3">
+      {['Tous', 'Still life', 'Oscillateur', 'Vaisseau', 'Canon'].map(cat => (
+        <button class="font-mono text-xs px-4 py-2 border border-[var(--color-border)] text-[var(--color-muted)] rounded-sm hover:border-[var(--color-text)] hover:text-[var(--color-text)] transition-all duration-200">
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Pattern cards -->
+    <div class="space-y-8">
+      {patterns.map((p, i) => (
+        <article class={`fade-in fade-in-delay-${(i % 3) + 1} border border-[var(--color-border)] bg-[var(--color-surface)]/20 rounded-sm overflow-hidden hover:border-[var(--color-border)]/80 transition-colors duration-300`}>
+          <div class="grid md:grid-cols-[280px_1fr] divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
+
+            <!-- Grille visuelle -->
+            <div class="p-8 flex flex-col items-start justify-between gap-6 bg-[var(--color-bg)]">
+              <div>
+                <span class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-wider">{p.categorie}</span>
+                <h2 class="text-2xl font-bold mt-1">{p.nom}</h2>
+              </div>
+
+              <div class="flex flex-col gap-1" aria-label={`Schéma ${p.nom}`}>
+                {p.miniGrille
+                  ? <span class="font-mono text-xs text-[var(--color-muted)]">(pattern trop grand pour le schéma)</span>
+                  : p.grille.map(row => (
+                    <div class="flex gap-1">
+                      {row.map(cell => (
+                        <span class={`w-5 h-5 rounded-sm block ${cell ? 'bg-[var(--color-accent)]' : 'border border-[var(--color-border)]/40 bg-transparent'}`}></span>
+                      ))}
+                    </div>
+                  ))
+                }
+              </div>
+
+              <div class="flex gap-6 font-mono text-xs text-[var(--color-muted)]">
+                <div><span class="block text-[var(--color-text)] font-bold text-base">{p.cellules}</span>cellules</div>
+                <div><span class="block text-[var(--color-text)] font-bold text-base">{p.periode}</span>période</div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="p-8 flex flex-col gap-6">
+              <p class="text-[var(--color-text)] leading-relaxed">{p.description}</p>
+              <div class="h-px bg-[var(--color-border)]"></div>
+              <div>
+                <span class="font-mono text-xs text-[var(--color-muted)] uppercase tracking-wider mb-2 block">Impact & histoire</span>
+                <p class="text-[var(--color-muted)] text-sm leading-relaxed">{p.impact}</p>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="fade-in text-center border-t border-[var(--color-border)] pt-16 mt-16">
+      <p class="text-[var(--color-muted)] mb-2">Ces patterns prennent vie dans la simulation.</p>
+      <p class="text-[var(--color-muted)] text-sm mb-8">Dessinez-les vous-même sur le canvas pour les voir évoluer.</p>
+      <a href="/jeu" class="group inline-flex items-center gap-3 bg-[var(--color-accent)] text-[var(--color-bg)] px-8 py-4 font-mono font-bold text-sm tracking-wide hover:bg-white transition-all duration-300 rounded-sm">
+        Ouvrir la simulation
+        <svg class="group-hover:translate-x-1 transition-transform duration-300" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </section>
+</BaseLayout>
