@@ -4,251 +4,377 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Le Jeu de la Vie" page="home">
 
-  <!-- HERO -->
-  <section class="min-h-screen flex flex-col justify-center px-6 md:px-12 pt-24 pb-16 max-w-6xl mx-auto">
-    <div class="fade-in">
-      <span class="inline-block font-mono text-xs text-[var(--color-accent)] tracking-widest uppercase mb-6 border border-[var(--color-accent)]/30 px-3 py-1 rounded-sm">
-        Automate cellulaire — 1970
-      </span>
+  <!-- ═══════════════════════════════════════════════════════ HERO -->
+  <section style="position:relative; min-height:100vh; display:flex; flex-direction:column; justify-content:center; overflow:hidden;">
+
+    <!-- Canvas animation fond -->
+    <canvas id="hero-bg" style="
+      position:absolute; inset:0; width:100%; height:100%;
+      pointer-events:none; z-index:0;
+    "></canvas>
+
+    <!-- Dégradé de masquage bas -->
+    <div style="
+      position:absolute; bottom:0; left:0; right:0; height:40%;
+      background:linear-gradient(to bottom, transparent, #101010);
+      pointer-events:none; z-index:1;
+    "></div>
+
+    <!-- Contenu hero -->
+    <div style="position:relative; z-index:2; padding:7rem 1.5rem 5rem; max-width:72rem; margin:0 auto; width:100%;">
+
+      <div class="fade-in" style="margin-bottom:1.5rem;">
+        <span style="
+          display:inline-flex; align-items:center; gap:0.5rem;
+          font-family:'Space Mono',monospace; font-size:0.7rem;
+          color:var(--color-accent); letter-spacing:0.15em;
+          text-transform:uppercase;
+          border:1px solid rgba(232,255,0,0.25); padding:0.35rem 0.85rem;
+          border-radius:2px;
+        ">
+          <span style="width:5px;height:5px;border-radius:50%;background:var(--color-accent);display:inline-block;animation:pulse 2s ease-in-out infinite;"></span>
+          Automate cellulaire · John Conway · 1970
+        </span>
+      </div>
+
+      <h1 class="fade-in fade-in-delay-1" style="
+        font-size:clamp(4rem,12vw,11rem); font-weight:900;
+        line-height:0.88; letter-spacing:-0.02em;
+        margin-bottom:2.5rem;
+        color:var(--color-text);
+      ">
+        Le Jeu<br />
+        <span style="color:var(--color-accent);">de la Vie</span>
+      </h1>
+
+      <p class="fade-in fade-in-delay-2" style="
+        color:var(--color-muted); font-size:clamp(1rem,2vw,1.25rem);
+        max-width:36rem; line-height:1.7; margin-bottom:3rem; font-weight:300;
+      ">
+        Un univers infini gouverné par quatre règles simples. Des cellules naissent,
+        survivent et meurent — et de ce chaos émergent des structures d'une complexité stupéfiante.
+      </p>
+
+      <div class="fade-in fade-in-delay-3" style="display:flex; flex-wrap:wrap; gap:1rem; margin-bottom:5rem;">
+        <a href="/jeu" style="
+          display:inline-flex; align-items:center; gap:0.75rem;
+          background:var(--color-accent); color:var(--color-bg);
+          padding:0.9rem 2rem; font-family:'Space Mono',monospace;
+          font-weight:700; font-size:0.8rem; letter-spacing:0.08em;
+          text-decoration:none; border-radius:2px;
+          transition:background 0.25s, transform 0.25s;
+        " onmouseover="this.style.background='#ffffff';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.background='#e8ff00';this.style.transform='translateY(0)'">
+          Lancer la simulation
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#regles" style="
+          display:inline-flex; align-items:center; gap:0.75rem;
+          border:1px solid var(--color-border); color:var(--color-muted);
+          padding:0.9rem 2rem; font-family:'Space Mono',monospace;
+          font-size:0.8rem; letter-spacing:0.08em; text-decoration:none;
+          border-radius:2px; transition:border-color 0.25s, color 0.25s;
+        " onmouseover="this.style.borderColor='var(--color-text)';this.style.color='var(--color-text)'"
+           onmouseout="this.style.borderColor='var(--color-border)';this.style.color='var(--color-muted)'">
+          Découvrir les règles
+        </a>
+      </div>
+
+      <!-- Chiffres clés -->
+      <div class="fade-in fade-in-delay-4" style="
+        display:grid; grid-template-columns:repeat(3, 1fr);
+        gap:2rem; border-top:1px solid var(--color-border); padding-top:3rem;
+        max-width:36rem;
+      ">
+        <div>
+          <p style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; color:var(--color-text); line-height:1; margin-bottom:0.25rem;">4</p>
+          <p style="font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--color-muted); text-transform:uppercase; letter-spacing:0.1em;">Règles</p>
+        </div>
+        <div>
+          <p style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; color:var(--color-accent); line-height:1; margin-bottom:0.25rem;">∞</p>
+          <p style="font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--color-muted); text-transform:uppercase; letter-spacing:0.1em;">Possibilités</p>
+        </div>
+        <div>
+          <p style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; color:var(--color-text); line-height:1; margin-bottom:0.25rem;">1970</p>
+          <p style="font-family:'Space Mono',monospace; font-size:0.65rem; color:var(--color-muted); text-transform:uppercase; letter-spacing:0.1em;">Origine</p>
+        </div>
+      </div>
+
     </div>
-    <h1 class="fade-in fade-in-delay-1 text-6xl md:text-8xl lg:text-[9rem] font-bold leading-[0.9] tracking-tight mb-8 text-[var(--color-text)]">
-      Le Jeu<br />
-      <span class="text-[var(--color-accent)]">de la Vie</span>
-    </h1>
-    <p class="fade-in fade-in-delay-2 text-[var(--color-muted)] text-lg md:text-xl max-w-xl leading-relaxed mb-12 font-light">
-      Un univers infini gouverné par quatre règles simples. Des cellules naissent, survivent et meurent — et de ce chaos émergent des structures d'une complexité stupéfiante.
-    </p>
-    <div class="fade-in fade-in-delay-3 flex flex-col sm:flex-row gap-4">
-      <a href="/jeu" class="group inline-flex items-center gap-3 bg-[var(--color-accent)] text-[var(--color-bg)] px-7 py-3.5 font-mono font-bold text-sm tracking-wide hover:bg-white transition-all duration-300 rounded-sm">
-        Lancer la simulation
-        <svg class="group-hover:translate-x-1 transition-transform duration-300" width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+  </section>
+
+  <!-- ═════════════════════════════════════════════════ RÈGLES -->
+  <section id="regles" style="padding:8rem 1.5rem; max-width:72rem; margin:0 auto;">
+
+    <div class="fade-in" style="margin-bottom:4rem;">
+      <span style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--color-accent); letter-spacing:0.15em; text-transform:uppercase;">01 — Les règles</span>
+      <h2 style="font-size:clamp(2.5rem,6vw,4.5rem); font-weight:900; margin-top:1rem; line-height:1.05; letter-spacing:-0.02em;">
+        Quatre lois<br />immuables
+      </h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1px; background:var(--color-border);">
+
+      <div class="rule-card fade-in fade-in-delay-1" data-rule="01">
+        <div class="rule-number">01</div>
+        <div class="rule-icon">
+          <!-- cellule qui naît -->
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="6" fill="#e8ff00"/>
+            <circle cx="7" cy="7" r="3" fill="rgba(232,255,0,0.3)"/>
+            <circle cx="25" cy="7" r="3" fill="rgba(232,255,0,0.3)"/>
+            <circle cx="7" cy="25" r="3" fill="rgba(232,255,0,0.3)"/>
+            <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="rule-title">Naissance</h3>
+        <p class="rule-desc">Une cellule <strong>morte</strong> avec exactement <em>3 voisines vivantes</em> devient vivante à la génération suivante.</p>
+        <div class="rule-formula">morte + 3 voisines → vivante</div>
+      </div>
+
+      <div class="rule-card fade-in fade-in-delay-2" data-rule="02">
+        <div class="rule-number">02</div>
+        <div class="rule-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="6" fill="#e8ff00"/>
+            <circle cx="7" cy="7" r="3" fill="rgba(232,255,0,0.3)"/>
+            <circle cx="25" cy="25" r="3" fill="rgba(232,255,0,0.3)"/>
+            <path d="M16 10 a6 6 0 0 1 0 12" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="rule-title">Survie</h3>
+        <p class="rule-desc">Une cellule <strong>vivante</strong> avec <em>2 ou 3 voisines</em> survit et reste en vie à la génération suivante.</p>
+        <div class="rule-formula">vivante + 2–3 voisines → vivante</div>
+      </div>
+
+      <div class="rule-card fade-in fade-in-delay-3" data-rule="03">
+        <div class="rule-number">03</div>
+        <div class="rule-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="6" stroke="#e8ff00" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+            <circle cx="7" cy="7" r="3" fill="rgba(232,255,0,0.5)"/>
+            <circle cx="25" cy="7" r="3" fill="rgba(232,255,0,0.5)"/>
+            <circle cx="7" cy="25" r="3" fill="rgba(232,255,0,0.5)"/>
+            <circle cx="25" cy="25" r="3" fill="rgba(232,255,0,0.5)"/>
+            <path d="M12 12l8 8M20 12l-8 8" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.6"/>
+          </svg>
+        </div>
+        <h3 class="rule-title">Surpopulation</h3>
+        <p class="rule-desc">Une cellule <strong>vivante</strong> avec <em>plus de 3 voisines</em> meurt par surpopulation à la prochaine génération.</p>
+        <div class="rule-formula">vivante + &gt;3 voisines → morte</div>
+      </div>
+
+      <div class="rule-card fade-in fade-in-delay-4" data-rule="04">
+        <div class="rule-number">04</div>
+        <div class="rule-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="6" stroke="#e8ff00" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
+            <circle cx="25" cy="7" r="3" fill="rgba(232,255,0,0.4)"/>
+            <path d="M12 12l8 8M20 12l-8 8" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.6"/>
+          </svg>
+        </div>
+        <h3 class="rule-title">Isolement</h3>
+        <p class="rule-desc">Une cellule <strong>vivante</strong> avec <em>moins de 2 voisines</em> meurt d'isolement par sous-population.</p>
+        <div class="rule-formula">vivante + &lt;2 voisines → morte</div>
+      </div>
+
+    </div>
+
+    <div class="fade-in" style="margin-top:3rem; padding:1.5rem 2rem; border:1px solid var(--color-border); background:var(--color-surface); border-radius:2px; display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;">
+        <circle cx="12" cy="12" r="10" stroke="#e8ff00" stroke-width="1.5"/>
+        <path d="M12 8v4l3 3" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <p style="font-family:'Space Mono',monospace; font-size:0.75rem; color:var(--color-muted); line-height:1.6;">
+        Toutes les cellules évoluent <strong style="color:var(--color-text);">simultanément</strong> à chaque génération.
+        L'état d'une cellule à la génération N+1 dépend uniquement de ses 8 voisines à la génération N.
+      </p>
+      <a href="/regles" style="margin-left:auto; font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--color-accent); text-decoration:none; white-space:nowrap; letter-spacing:0.08em; flex-shrink:0;"
+        onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+        Règles détaillées →
       </a>
-      <a href="#regles" class="inline-flex items-center gap-3 border border-[var(--color-border)] text-[var(--color-muted)] px-7 py-3.5 font-mono text-sm tracking-wide hover:border-[var(--color-text)] hover:text-[var(--color-text)] transition-all duration-300 rounded-sm">
-        Découvrir les règles
-      </a>
     </div>
 
-    <div class="mt-24 grid grid-cols-3 gap-8 border-t border-[var(--color-border)] pt-12 fade-in fade-in-delay-4">
-      <div>
-        <p class="text-4xl font-bold text-[var(--color-text)] mb-1">4</p>
-        <p class="text-[var(--color-muted)] text-sm font-mono">Règles</p>
-      </div>
-      <div>
-        <p class="text-4xl font-bold text-[var(--color-text)] mb-1">∞</p>
-        <p class="text-[var(--color-muted)] text-sm font-mono">Possibilités</p>
-      </div>
-      <div>
-        <p class="text-4xl font-bold text-[var(--color-text)] mb-1">1970</p>
-        <p class="text-[var(--color-muted)] text-sm font-mono">Origine</p>
-      </div>
-    </div>
   </section>
 
-  <!-- RÈGLES -->
-  <section id="regles" class="py-32 px-6 md:px-12 max-w-6xl mx-auto">
-    <div class="mb-16 fade-in">
-      <span class="font-mono text-xs text-[var(--color-accent)] tracking-widest uppercase">01 — Les règles</span>
-      <h2 class="text-5xl md:text-6xl font-bold mt-4 leading-tight">Quatre lois<br />immuables</h2>
-    </div>
+  <!-- ═══════════════════════════════════════════════ HISTOIRE -->
+  <section id="histoire" style="padding:8rem 1.5rem; border-top:1px solid var(--color-border);">
+    <div style="max-width:72rem; margin:0 auto; display:grid; grid-template-columns:1fr; gap:4rem;">
 
-    <div class="grid md:grid-cols-2 gap-4">
-      <div class="fade-in fade-in-delay-1 border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-8 rounded-sm hover:border-[var(--color-accent)]/40 transition-all duration-300 group">
-        <div class="w-10 h-10 border border-[var(--color-accent)]/30 rounded-sm flex items-center justify-center mb-6 group-hover:border-[var(--color-accent)] transition-colors">
-          <span class="text-[var(--color-accent)] font-mono font-bold text-sm">01</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-[var(--color-text)]">Naissance</h3>
-        <p class="text-[var(--color-muted)] leading-relaxed">Une cellule <strong class="text-[var(--color-text)]">morte</strong> avec exactement <strong class="text-[var(--color-accent)]">3 voisines vivantes</strong> devient vivante à la prochaine génération.</p>
+      <!-- En-tête -->
+      <div class="fade-in">
+        <span style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--color-accent); letter-spacing:0.15em; text-transform:uppercase;">02 — Histoire</span>
+        <h2 style="font-size:clamp(2.5rem,6vw,4.5rem); font-weight:900; margin-top:1rem; line-height:1.05; letter-spacing:-0.02em;">
+          John Conway<br /><span style="color:var(--color-muted); font-weight:400;">1937 — 2020</span>
+        </h2>
       </div>
 
-      <div class="fade-in fade-in-delay-2 border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-8 rounded-sm hover:border-[var(--color-accent)]/40 transition-all duration-300 group">
-        <div class="w-10 h-10 border border-[var(--color-accent)]/30 rounded-sm flex items-center justify-center mb-6 group-hover:border-[var(--color-accent)] transition-colors">
-          <span class="text-[var(--color-accent)] font-mono font-bold text-sm">02</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-[var(--color-text)]">Survie</h3>
-        <p class="text-[var(--color-muted)] leading-relaxed">Une cellule <strong class="text-[var(--color-text)]">vivante</strong> avec <strong class="text-[var(--color-accent)]">2 ou 3 voisines vivantes</strong> survit et reste en vie à la génération suivante.</p>
-      </div>
+      <div style="display:grid; grid-template-columns:1fr; gap:4rem;" class="histoire-grid">
 
-      <div class="fade-in fade-in-delay-3 border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-8 rounded-sm hover:border-[var(--color-accent)]/40 transition-all duration-300 group">
-        <div class="w-10 h-10 border border-[var(--color-accent)]/30 rounded-sm flex items-center justify-center mb-6 group-hover:border-[var(--color-accent)] transition-colors">
-          <span class="text-[var(--color-accent)] font-mono font-bold text-sm">03</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-[var(--color-text)]">Surpopulation</h3>
-        <p class="text-[var(--color-muted)] leading-relaxed">Une cellule <strong class="text-[var(--color-text)]">vivante</strong> avec <strong class="text-[var(--color-accent)]">plus de 3 voisines</strong> meurt par surpopulation.</p>
-      </div>
-
-      <div class="fade-in fade-in-delay-4 border border-[var(--color-border)] bg-[var(--color-surface)]/50 p-8 rounded-sm hover:border-[var(--color-accent)]/40 transition-all duration-300 group">
-        <div class="w-10 h-10 border border-[var(--color-accent)]/30 rounded-sm flex items-center justify-center mb-6 group-hover:border-[var(--color-accent)] transition-colors">
-          <span class="text-[var(--color-accent)] font-mono font-bold text-sm">04</span>
-        </div>
-        <h3 class="text-xl font-bold mb-3 text-[var(--color-text)]">Isolement</h3>
-        <p class="text-[var(--color-muted)] leading-relaxed">Une cellule <strong class="text-[var(--color-text)]">vivante</strong> avec <strong class="text-[var(--color-accent)]">moins de 2 voisines</strong> meurt par sous-population.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HISTOIRE -->
-  <section id="histoire" class="py-32 px-6 md:px-12 border-t border-[var(--color-border)]">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-      <div>
-        <span class="fade-in font-mono text-xs text-[var(--color-accent)] tracking-widest uppercase">02 — Histoire</span>
-        <h2 class="fade-in fade-in-delay-1 text-5xl md:text-6xl font-bold mt-4 leading-tight mb-8">John Conway<br /><span class="text-[var(--color-muted)]">1937 — 2020</span></h2>
-        <div class="fade-in fade-in-delay-2 space-y-5 text-[var(--color-muted)] leading-relaxed">
-          <p>
-            John Horton Conway était un mathématicien britannique de renom, professeur à l'Université de Cambridge puis à Princeton. Passionné par les jeux et les puzzles mathématiques, il a révolutionné plusieurs domaines des mathématiques.
+        <!-- Texte biographique -->
+        <div class="fade-in fade-in-delay-1" style="display:flex; flex-direction:column; gap:1.25rem;">
+          <p style="color:var(--color-muted); line-height:1.8; font-size:1.05rem;">
+            John Horton Conway était un mathématicien britannique de renom, professeur à Cambridge puis à Princeton.
+            Passionné par les jeux et les puzzles, il a révolutionné plusieurs domaines des mathématiques.
           </p>
-          <p>
-            En <strong class="text-[var(--color-text)]">octobre 1970</strong>, il publie dans la revue <em>Scientific American</em> son automate cellulaire baptisé <strong class="text-[var(--color-text)]">Game of Life</strong>. Conçu à partir d'un simple échiquier et de quatre règles, il fascine immédiatement la communauté scientifique et informatique.
+          <p style="color:var(--color-muted); line-height:1.8; font-size:1.05rem;">
+            En <strong style="color:var(--color-text);">octobre 1970</strong>, il publie dans
+            <em>Scientific American</em> son automate cellulaire baptisé <strong style="color:var(--color-text);">Game of Life</strong>.
+            Conçu à partir d'un simple échiquier et de quatre règles, il fascine immédiatement
+            la communauté scientifique et informatique mondiale.
           </p>
-          <p>
-            Le jeu démontre qu'une <strong class="text-[var(--color-text)]">complexité infinie</strong> peut émerger de règles d'une simplicité absolue — un concept fondateur en théorie de la complexité et en informatique théorique.
+          <p style="color:var(--color-muted); line-height:1.8; font-size:1.05rem;">
+            Le jeu démontre qu'une <strong style="color:var(--color-text);">complexité infinie</strong> peut
+            émerger de règles d'une simplicité absolue — un concept fondateur en informatique théorique.
           </p>
-        </div>
-      </div>
-
-      <div class="fade-in fade-in-delay-3">
-        <div class="border border-[var(--color-border)] bg-[var(--color-surface)]/30 p-8 rounded-sm">
-          <div class="flex items-start gap-4 mb-6">
-            <div class="w-12 h-12 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded-sm flex items-center justify-center flex-shrink-0">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L2 7v11h16V7L10 2z" stroke="#e8ff00" stroke-width="1.2"/><path d="M7 18v-7h6v7" stroke="#e8ff00" stroke-width="1.2"/></svg>
-            </div>
-            <div>
-              <p class="font-bold text-[var(--color-text)]">Turing-complet</p>
-              <p class="text-[var(--color-muted)] text-sm mt-1">Le Game of Life peut simuler n'importe quel ordinateur. Il est Turing-complet — capable de résoudre tout problème calculable.</p>
-            </div>
+          <div style="margin-top:0.5rem;">
+            <a href="/histoire" style="
+              display:inline-flex; align-items:center; gap:0.5rem;
+              font-family:'Space Mono',monospace; font-size:0.75rem;
+              color:var(--color-accent); text-decoration:none; letter-spacing:0.08em;
+            " onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+              Lire la biographie complète →
+            </a>
           </div>
-          <div class="h-px bg-[var(--color-border)] my-6"></div>
-          <div class="flex items-start gap-4 mb-6">
-            <div class="w-12 h-12 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded-sm flex items-center justify-center flex-shrink-0">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#e8ff00" stroke-width="1.2"/><path d="M10 6v4l3 3" stroke="#e8ff00" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </div>
+
+        <!-- Propriétés remarquables -->
+        <div class="fade-in fade-in-delay-2">
+          <div style="display:flex; flex-direction:column; gap:0; border:1px solid var(--color-border); border-radius:2px; overflow:hidden;">
+
+            <div class="prop-item">
+              <div class="prop-icon">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                  <rect x="2" y="2" width="7" height="7" stroke="#e8ff00" stroke-width="1.2"/>
+                  <rect x="11" y="2" width="7" height="7" stroke="#e8ff00" stroke-width="1.2" fill="rgba(232,255,0,0.1)"/>
+                  <rect x="2" y="11" width="7" height="7" stroke="#e8ff00" stroke-width="1.2" fill="rgba(232,255,0,0.1)"/>
+                  <rect x="11" y="11" width="7" height="7" stroke="#e8ff00" stroke-width="1.2"/>
+                </svg>
+              </div>
+              <div>
+                <p class="prop-title">Turing-complet</p>
+                <p class="prop-desc">Le Game of Life peut simuler n'importe quel ordinateur. Il est capable de résoudre tout problème calculable, y compris sa propre simulation.</p>
+              </div>
             </div>
-            <div>
-              <p class="font-bold text-[var(--color-text)]">Pas de déterminisme apparent</p>
-              <p class="text-[var(--color-muted)] text-sm mt-1">Malgré ses règles strictement déterministes, prédire l'évolution d'un pattern arbitraire est mathématiquement impossible (indécidable).</p>
+
+            <div class="prop-item" style="border-top:1px solid var(--color-border);">
+              <div class="prop-icon">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="8" stroke="#e8ff00" stroke-width="1.2"/>
+                  <path d="M10 6v4l3 3" stroke="#e8ff00" stroke-width="1.2" stroke-linecap="round"/>
+                  <path d="M6 3l8 14M14 3L6 17" stroke="#e8ff00" stroke-width="1" stroke-linecap="round" stroke-opacity="0.3"/>
+                </svg>
+              </div>
+              <div>
+                <p class="prop-title">Indécidable</p>
+                <p class="prop-desc">Malgré ses règles déterministes, il est mathématiquement impossible de prédire l'évolution d'un pattern arbitraire sans le simuler.</p>
+              </div>
             </div>
-          </div>
-          <div class="h-px bg-[var(--color-border)] my-6"></div>
-          <div class="flex items-start gap-4">
-            <div class="w-12 h-12 bg-[var(--color-accent)]/10 border border-[var(--color-accent)]/20 rounded-sm flex items-center justify-center flex-shrink-0">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2 10h16M10 2v16" stroke="#e8ff00" stroke-width="1.2" stroke-linecap="round"/><rect x="6" y="6" width="8" height="8" stroke="#e8ff00" stroke-width="1.2"/></svg>
+
+            <div class="prop-item" style="border-top:1px solid var(--color-border);">
+              <div class="prop-icon">
+                <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                  <path d="M2 10h16M10 2v16" stroke="#e8ff00" stroke-width="1.2" stroke-linecap="round"/>
+                  <circle cx="10" cy="10" r="3" stroke="#e8ff00" stroke-width="1.2"/>
+                </svg>
+              </div>
+              <div>
+                <p class="prop-title">Grille infinie</p>
+                <p class="prop-desc">Théoriquement infinie dans toutes les directions — des patterns peuvent se propager indéfiniment, comme le Gosper Glider Gun.</p>
+              </div>
             </div>
-            <div>
-              <p class="font-bold text-[var(--color-text)]">Grille infinie</p>
-              <p class="text-[var(--color-muted)] text-sm mt-1">Théoriquement, la grille est infinie dans toutes les directions. Des patterns peuvent se déplacer indéfiniment.</p>
-            </div>
+
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PATTERNS -->
-  <section id="patterns" class="py-32 px-6 md:px-12 border-t border-[var(--color-border)]">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-16 fade-in">
-        <span class="font-mono text-xs text-[var(--color-accent)] tracking-widest uppercase">03 — Patterns célèbres</span>
-        <h2 class="text-5xl md:text-6xl font-bold mt-4 leading-tight">Structures<br />remarquables</h2>
+  <!-- ═══════════════════════════════════════════════ PATTERNS -->
+  <section id="patterns" style="padding:8rem 1.5rem; border-top:1px solid var(--color-border);">
+    <div style="max-width:72rem; margin:0 auto;">
+
+      <div class="fade-in" style="margin-bottom:4rem; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:2rem;">
+        <div>
+          <span style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--color-accent); letter-spacing:0.15em; text-transform:uppercase;">03 — Patterns célèbres</span>
+          <h2 style="font-size:clamp(2.5rem,6vw,4.5rem); font-weight:900; margin-top:1rem; line-height:1.05; letter-spacing:-0.02em;">
+            Structures<br />remarquables
+          </h2>
+        </div>
+        <a href="/patterns" style="
+          font-family:'Space Mono',monospace; font-size:0.75rem;
+          color:var(--color-muted); text-decoration:none; letter-spacing:0.08em;
+          padding-bottom:0.25rem; border-bottom:1px solid var(--color-border);
+        " onmouseover="this.style.color='var(--color-text)';this.style.borderColor='var(--color-text)'"
+           onmouseout="this.style.color='var(--color-muted)';this.style.borderColor='var(--color-border)'">
+          Tous les patterns →
+        </a>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem;">
 
         <!-- Glider -->
-        <div class="fade-in fade-in-delay-1 border border-[var(--color-border)] bg-[var(--color-surface)]/30 p-8 rounded-sm hover:border-[var(--color-border)]/80 transition-all duration-300">
-          <div class="mb-6">
-            <div class="font-mono text-[var(--color-accent)] text-xs mb-4 tracking-wider">GLIDER</div>
-            <div class="font-mono text-sm leading-tight text-[var(--color-text)] bg-[var(--color-bg)] p-4 rounded-sm border border-[var(--color-border)]">
-              <div class="flex gap-1 mb-1">
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-              </div>
-              <div class="flex gap-1 mb-1">
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-              </div>
-              <div class="flex gap-1">
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-              </div>
-            </div>
+        <div class="pattern-card fade-in fade-in-delay-1">
+          <div class="pattern-header">
+            <span class="pattern-tag">Mobile</span>
+            <span class="pattern-name">Glider</span>
           </div>
-          <h3 class="font-bold text-lg mb-2">Glider</h3>
-          <p class="text-[var(--color-muted)] text-sm leading-relaxed">Le plus célèbre des patterns mobiles. Se déplace en diagonale à travers la grille, se reproduisant toutes les 4 générations.</p>
-          <p class="text-[var(--color-accent)] font-mono text-xs mt-4">5 cellules · Oscille / se déplace</p>
+          <div class="pattern-grid" style="--r:3; --c:3;">
+            <div class="pg-dead"></div><div class="pg-alive"></div><div class="pg-dead"></div>
+            <div class="pg-dead"></div><div class="pg-dead"></div><div class="pg-alive"></div>
+            <div class="pg-alive"></div><div class="pg-alive"></div><div class="pg-alive"></div>
+          </div>
+          <p class="pattern-desc">Le plus célèbre des patterns mobiles. Se déplace en diagonale, se reproduisant toutes les 4 générations.</p>
+          <div class="pattern-meta">5 cellules · Période 4</div>
         </div>
 
         <!-- Blinker -->
-        <div class="fade-in fade-in-delay-2 border border-[var(--color-border)] bg-[var(--color-surface)]/30 p-8 rounded-sm hover:border-[var(--color-border)]/80 transition-all duration-300">
-          <div class="mb-6">
-            <div class="font-mono text-[var(--color-accent)] text-xs mb-4 tracking-wider">BLINKER</div>
-            <div class="font-mono text-sm leading-tight text-[var(--color-text)] bg-[var(--color-bg)] p-4 rounded-sm border border-[var(--color-border)]">
-              <div class="flex gap-1 mb-1">
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-              </div>
-              <div class="flex gap-1 mb-1">
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-              </div>
-              <div class="flex gap-1">
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-              </div>
-            </div>
+        <div class="pattern-card fade-in fade-in-delay-2">
+          <div class="pattern-header">
+            <span class="pattern-tag">Oscillateur</span>
+            <span class="pattern-name">Blinker</span>
           </div>
-          <h3 class="font-bold text-lg mb-2">Blinker</h3>
-          <p class="text-[var(--color-muted)] text-sm leading-relaxed">L'oscillateur le plus simple. Alterne entre une ligne horizontale et une ligne verticale de 3 cellules, avec une période de 2.</p>
-          <p class="text-[var(--color-accent)] font-mono text-xs mt-4">3 cellules · Période 2</p>
+          <div class="pattern-grid" style="--r:3; --c:3;">
+            <div class="pg-dead"></div><div class="pg-dead"></div><div class="pg-dead"></div>
+            <div class="pg-alive"></div><div class="pg-alive"></div><div class="pg-alive"></div>
+            <div class="pg-dead"></div><div class="pg-dead"></div><div class="pg-dead"></div>
+          </div>
+          <p class="pattern-desc">L'oscillateur le plus simple. Alterne entre une ligne horizontale et verticale de 3 cellules.</p>
+          <div class="pattern-meta">3 cellules · Période 2</div>
         </div>
 
         <!-- Block -->
-        <div class="fade-in fade-in-delay-3 border border-[var(--color-border)] bg-[var(--color-surface)]/30 p-8 rounded-sm hover:border-[var(--color-border)]/80 transition-all duration-300">
-          <div class="mb-6">
-            <div class="font-mono text-[var(--color-accent)] text-xs mb-4 tracking-wider">BLOCK</div>
-            <div class="font-mono text-sm leading-tight text-[var(--color-text)] bg-[var(--color-bg)] p-4 rounded-sm border border-[var(--color-border)]">
-              <div class="flex gap-1 mb-1">
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-              </div>
-              <div class="flex gap-1 mb-1">
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-              </div>
-              <div class="flex gap-1 mb-1">
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-[var(--color-accent)] rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-              </div>
-              <div class="flex gap-1">
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-                <span class="w-4 h-4 bg-transparent border border-[var(--color-border)]/50 rounded-sm inline-block"></span>
-              </div>
-            </div>
+        <div class="pattern-card fade-in fade-in-delay-3">
+          <div class="pattern-header">
+            <span class="pattern-tag">Still life</span>
+            <span class="pattern-name">Block</span>
           </div>
-          <h3 class="font-bold text-lg mb-2">Block</h3>
-          <p class="text-[var(--color-muted)] text-sm leading-relaxed">La structure stable la plus simple. Un carré 2×2 de cellules vivantes qui reste identique à travers les générations, à l'équilibre parfait.</p>
-          <p class="text-[var(--color-accent)] font-mono text-xs mt-4">4 cellules · Still life</p>
+          <div class="pattern-grid" style="--r:4; --c:4;">
+            <div class="pg-dead"></div><div class="pg-dead"></div><div class="pg-dead"></div><div class="pg-dead"></div>
+            <div class="pg-dead"></div><div class="pg-alive"></div><div class="pg-alive"></div><div class="pg-dead"></div>
+            <div class="pg-dead"></div><div class="pg-alive"></div><div class="pg-alive"></div><div class="pg-dead"></div>
+            <div class="pg-dead"></div><div class="pg-dead"></div><div class="pg-dead"></div><div class="pg-dead"></div>
+          </div>
+          <p class="pattern-desc">La structure stable la plus simple. Un carré 2×2 qui reste identique à travers les générations.</p>
+          <div class="pattern-meta">4 cellules · Stable</div>
         </div>
 
       </div>
 
-      <div class="mt-16 text-center fade-in">
-        <a href="/jeu" class="group inline-flex items-center gap-3 bg-[var(--color-accent)] text-[var(--color-bg)] px-8 py-4 font-mono font-bold text-sm tracking-wide hover:bg-white transition-all duration-300 rounded-sm">
+      <div class="fade-in" style="margin-top:4rem; text-align:center;">
+        <a href="/jeu" style="
+          display:inline-flex; align-items:center; gap:0.75rem;
+          background:var(--color-accent); color:var(--color-bg);
+          padding:1rem 2.5rem; font-family:'Space Mono',monospace;
+          font-weight:700; font-size:0.85rem; letter-spacing:0.08em;
+          text-decoration:none; border-radius:2px;
+          transition:background 0.25s, transform 0.25s;
+        " onmouseover="this.style.background='#ffffff';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.background='#e8ff00';this.style.transform='translateY(0)'">
           Explorer la simulation
-          <svg class="group-hover:translate-x-1 transition-transform duration-300" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
@@ -257,3 +383,163 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
 </BaseLayout>
+
+<style>
+  /* ── Animation pulse ──────────────────────────────────────────── */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+
+  /* ── Rule cards ───────────────────────────────────────────────── */
+  .rule-card {
+    background: var(--color-surface);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.25s;
+    cursor: default;
+  }
+  .rule-card:hover {
+    background: #1f1f1f;
+  }
+  .rule-card:hover .rule-number {
+    color: var(--color-accent);
+  }
+
+  .rule-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; color: #444;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    transition: color 0.25s;
+  }
+
+  .rule-icon {
+    margin-bottom: 1.5rem;
+    opacity: 0.85;
+  }
+
+  .rule-title {
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--color-text); margin-bottom: 0.75rem;
+  }
+
+  .rule-desc {
+    color: var(--color-muted); font-size: 0.9rem;
+    line-height: 1.7; margin-bottom: 1.25rem;
+  }
+  .rule-desc strong { color: var(--color-text); }
+  .rule-desc em { color: var(--color-accent); font-style: normal; font-weight: 600; }
+
+  .rule-formula {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; color: #444;
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--color-border);
+    padding-top: 1rem;
+    transition: color 0.25s;
+  }
+  .rule-card:hover .rule-formula { color: var(--color-accent); }
+
+  /* ── History ──────────────────────────────────────────────────── */
+  @media (min-width: 768px) {
+    .histoire-grid {
+      grid-template-columns: 1fr 1fr !important;
+    }
+  }
+
+  .prop-item {
+    display: flex; gap: 1.25rem; padding: 1.5rem 1.75rem;
+    align-items: flex-start;
+    background: var(--color-surface);
+    transition: background 0.2s;
+  }
+  .prop-item:hover { background: #1e1e1e; }
+
+  .prop-icon {
+    width: 2.5rem; height: 2.5rem; flex-shrink: 0;
+    background: rgba(232,255,0,0.06);
+    border: 1px solid rgba(232,255,0,0.15);
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .prop-title {
+    font-weight: 700; color: var(--color-text);
+    font-size: 0.95rem; margin-bottom: 0.35rem;
+  }
+
+  .prop-desc {
+    color: var(--color-muted); font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  /* ── Pattern cards ────────────────────────────────────────────── */
+  .pattern-card {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    padding: 1.75rem;
+    border-radius: 2px;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .pattern-card:hover {
+    border-color: rgba(232,255,0,0.3);
+    transform: translateY(-3px);
+  }
+
+  .pattern-header {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  .pattern-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem; color: var(--color-accent);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: 1px solid rgba(232,255,0,0.25);
+    padding: 0.2rem 0.5rem; border-radius: 2px;
+  }
+
+  .pattern-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem; color: #555;
+    letter-spacing: 0.1em;
+  }
+
+  .pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--c), 1.25rem);
+    grid-template-rows: repeat(var(--r), 1.25rem);
+    gap: 3px;
+    margin-bottom: 1.25rem;
+    background: var(--color-bg);
+    padding: 0.75rem;
+    border-radius: 2px;
+    border: 1px solid var(--color-border);
+  }
+
+  .pg-alive {
+    background: var(--color-accent);
+    border-radius: 2px;
+    box-shadow: 0 0 6px rgba(232,255,0,0.4);
+  }
+
+  .pg-dead {
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 2px;
+  }
+
+  .pattern-desc {
+    color: var(--color-muted); font-size: 0.85rem;
+    line-height: 1.65; margin-bottom: 1rem;
+  }
+
+  .pattern-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; color: var(--color-accent);
+    letter-spacing: 0.08em;
+  }
+</style>
+
+<script is:inline src="/js/home-bg.js" defer></script>
