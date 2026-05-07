@@ -7,99 +7,99 @@ import Layout from '../layouts/Layout.astro';
   <section class="min-h-screen pt-36 pb-24 px-6 md:px-12 max-w-6xl mx-auto">
 
     <div class="mb-20 fade-in">
-      <a href="/" class="inline-flex items-center gap-2 font-mono text-xs text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors mb-8 uppercase tracking-widest">
+      <a href="/" class="inline-flex items-center gap-2 font-mono text-xs text-muted hover:text-text transition-colors mb-8 uppercase tracking-widest">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 6H2M5 3L2 6l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Accueil
       </a>
-      <span class="block font-mono text-xs text-[var(--color-accent)] tracking-widest uppercase mb-4">01 — Les règles</span>
-      <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-6">Quatre lois<br /><span class="text-[var(--color-muted)]">immuables</span></h1>
-      <p class="text-[var(--color-muted)] text-lg max-w-2xl leading-relaxed">
+      <span class="block font-mono text-xs text-accent tracking-widest uppercase mb-4">01 — Les règles</span>
+      <h1 class="text-6xl md:text-7xl font-bold leading-tight mb-6">Quatre lois<br /><span class="text-muted">immuables</span></h1>
+      <p class="text-muted text-lg max-w-2xl leading-relaxed">
         Le Jeu de la Vie repose sur quatre règles d'une simplicité absolue, appliquées simultanément à chaque cellule à chaque génération. Elles suffisent à engendrer une complexité infinie.
       </p>
     </div>
 
     <!-- Règles principales -->
     <div class="grid md:grid-cols-2 gap-6 mb-24">
-      <div class="fade-in fade-in-delay-1 border border-[var(--color-border)] bg-[var(--color-surface)]/40 p-10 rounded-sm">
+      <div class="fade-in fade-in-delay-1 border border-border bg-surface/40 p-10 rounded-sm">
         <div class="flex items-center gap-4 mb-8">
-          <div class="w-12 h-12 border border-[var(--color-accent)] rounded-sm flex items-center justify-center">
-            <span class="text-[var(--color-accent)] font-mono font-bold">01</span>
+          <div class="w-12 h-12 border border-accent rounded-sm flex items-center justify-center">
+            <span class="text-accent font-mono font-bold">01</span>
           </div>
           <h2 class="text-2xl font-bold">Naissance</h2>
         </div>
         <div class="space-y-4">
-          <p class="text-[var(--color-text)] text-xl font-light leading-relaxed">
-            Une cellule <span class="text-[var(--color-muted)]">morte</span> avec exactement <span class="text-[var(--color-accent)] font-semibold">3 voisines vivantes</span> devient vivante à la prochaine génération.
+          <p class="text-text text-xl font-light leading-relaxed">
+            Une cellule <span class="text-muted">morte</span> avec exactement <span class="text-accent font-semibold">3 voisines vivantes</span> devient vivante à la prochaine génération.
           </p>
-          <div class="h-px bg-[var(--color-border)] my-6"></div>
-          <p class="text-[var(--color-muted)] text-sm leading-relaxed">
+          <div class="h-px bg-border my-6"></div>
+          <p class="text-muted text-sm leading-relaxed">
             C'est la condition de reproduction : il faut exactement trois cellules autour d'une cellule morte pour qu'elle "naisse". Trop peu, pas assez de vitalité. Trop, surpopulation.
           </p>
-          <div class="mt-6 font-mono text-xs text-[var(--color-muted)] bg-[var(--color-bg)] p-4 rounded-sm border border-[var(--color-border)]">
-            <div>voisines = 3 <span class="text-[var(--color-accent)]">→</span> cellule morte <span class="text-[var(--color-accent)]">naît</span></div>
+          <div class="mt-6 font-mono text-xs text-muted bg-bg p-4 rounded-sm border border-border">
+            <div>voisines = 3 <span class="text-accent">→</span> cellule morte <span class="text-accent">naît</span></div>
           </div>
         </div>
       </div>
 
-      <div class="fade-in fade-in-delay-2 border border-[var(--color-border)] bg-[var(--color-surface)]/40 p-10 rounded-sm">
+      <div class="fade-in fade-in-delay-2 border border-border bg-surface/40 p-10 rounded-sm">
         <div class="flex items-center gap-4 mb-8">
-          <div class="w-12 h-12 border border-[var(--color-accent)] rounded-sm flex items-center justify-center">
-            <span class="text-[var(--color-accent)] font-mono font-bold">02</span>
+          <div class="w-12 h-12 border border-accent rounded-sm flex items-center justify-center">
+            <span class="text-accent font-mono font-bold">02</span>
           </div>
           <h2 class="text-2xl font-bold">Survie</h2>
         </div>
         <div class="space-y-4">
-          <p class="text-[var(--color-text)] text-xl font-light leading-relaxed">
-            Une cellule <span class="text-[var(--color-muted)]">vivante</span> avec <span class="text-[var(--color-accent)] font-semibold">2 ou 3 voisines vivantes</span> reste en vie à la génération suivante.
+          <p class="text-text text-xl font-light leading-relaxed">
+            Une cellule <span class="text-muted">vivante</span> avec <span class="text-accent font-semibold">2 ou 3 voisines vivantes</span> reste en vie à la génération suivante.
           </p>
-          <div class="h-px bg-[var(--color-border)] my-6"></div>
-          <p class="text-[var(--color-muted)] text-sm leading-relaxed">
+          <div class="h-px bg-border my-6"></div>
+          <p class="text-muted text-sm leading-relaxed">
             C'est la règle de stabilité. Une cellule entourée de 2 ou 3 voisines se trouve dans un environnement équilibré — ni trop isolée, ni étouffée.
           </p>
-          <div class="mt-6 font-mono text-xs text-[var(--color-muted)] bg-[var(--color-bg)] p-4 rounded-sm border border-[var(--color-border)]">
-            <div>voisines = 2 ou 3 <span class="text-[var(--color-accent)]">→</span> cellule vivante <span class="text-[var(--color-accent)]">survit</span></div>
+          <div class="mt-6 font-mono text-xs text-muted bg-bg p-4 rounded-sm border border-border">
+            <div>voisines = 2 ou 3 <span class="text-accent">→</span> cellule vivante <span class="text-accent">survit</span></div>
           </div>
         </div>
       </div>
 
-      <div class="fade-in fade-in-delay-3 border border-[var(--color-border)] bg-[var(--color-surface)]/40 p-10 rounded-sm">
+      <div class="fade-in fade-in-delay-3 border border-border bg-surface/40 p-10 rounded-sm">
         <div class="flex items-center gap-4 mb-8">
-          <div class="w-12 h-12 border border-[var(--color-border)] rounded-sm flex items-center justify-center">
-            <span class="text-[var(--color-muted)] font-mono font-bold">03</span>
+          <div class="w-12 h-12 border border-border rounded-sm flex items-center justify-center">
+            <span class="text-muted font-mono font-bold">03</span>
           </div>
           <h2 class="text-2xl font-bold">Surpopulation</h2>
         </div>
         <div class="space-y-4">
-          <p class="text-[var(--color-text)] text-xl font-light leading-relaxed">
-            Une cellule <span class="text-[var(--color-muted)]">vivante</span> avec <span class="font-semibold">plus de 3 voisines</span> meurt par surpopulation.
+          <p class="text-text text-xl font-light leading-relaxed">
+            Une cellule <span class="text-muted">vivante</span> avec <span class="font-semibold">plus de 3 voisines</span> meurt par surpopulation.
           </p>
-          <div class="h-px bg-[var(--color-border)] my-6"></div>
-          <p class="text-[var(--color-muted)] text-sm leading-relaxed">
+          <div class="h-px bg-border my-6"></div>
+          <p class="text-muted text-sm leading-relaxed">
             Quand trop de voisins entourent une cellule, les ressources se raréfient. Avec 4, 5, 6, 7 ou 8 voisins, la cellule périt inévitablement.
           </p>
-          <div class="mt-6 font-mono text-xs text-[var(--color-muted)] bg-[var(--color-bg)] p-4 rounded-sm border border-[var(--color-border)]">
-            <div>voisines &gt; 3 <span class="text-[var(--color-muted)]">→</span> cellule vivante <span class="text-[var(--color-muted)]">meurt</span></div>
+          <div class="mt-6 font-mono text-xs text-muted bg-bg p-4 rounded-sm border border-border">
+            <div>voisines &gt; 3 <span class="text-muted">→</span> cellule vivante <span class="text-muted">meurt</span></div>
           </div>
         </div>
       </div>
 
-      <div class="fade-in fade-in-delay-4 border border-[var(--color-border)] bg-[var(--color-surface)]/40 p-10 rounded-sm">
+      <div class="fade-in fade-in-delay-4 border border-border bg-surface/40 p-10 rounded-sm">
         <div class="flex items-center gap-4 mb-8">
-          <div class="w-12 h-12 border border-[var(--color-border)] rounded-sm flex items-center justify-center">
-            <span class="text-[var(--color-muted)] font-mono font-bold">04</span>
+          <div class="w-12 h-12 border border-border rounded-sm flex items-center justify-center">
+            <span class="text-muted font-mono font-bold">04</span>
           </div>
           <h2 class="text-2xl font-bold">Isolement</h2>
         </div>
         <div class="space-y-4">
-          <p class="text-[var(--color-text)] text-xl font-light leading-relaxed">
-            Une cellule <span class="text-[var(--color-muted)]">vivante</span> avec <span class="font-semibold">moins de 2 voisines</span> meurt par sous-population.
+          <p class="text-text text-xl font-light leading-relaxed">
+            Une cellule <span class="text-muted">vivante</span> avec <span class="font-semibold">moins de 2 voisines</span> meurt par sous-population.
           </p>
-          <div class="h-px bg-[var(--color-border)] my-6"></div>
-          <p class="text-[var(--color-muted)] text-sm leading-relaxed">
+          <div class="h-px bg-border my-6"></div>
+          <p class="text-muted text-sm leading-relaxed">
             Une cellule seule ou avec une seule voisine manque de l'énergie collective nécessaire à la survie. Elle s'éteint, faute d'être entourée.
           </p>
-          <div class="mt-6 font-mono text-xs text-[var(--color-muted)] bg-[var(--color-bg)] p-4 rounded-sm border border-[var(--color-border)]">
-            <div>voisines &lt; 2 <span class="text-[var(--color-muted)]">→</span> cellule vivante <span class="text-[var(--color-muted)]">meurt</span></div>
+          <div class="mt-6 font-mono text-xs text-muted bg-bg p-4 rounded-sm border border-border">
+            <div>voisines &lt; 2 <span class="text-muted">→</span> cellule vivante <span class="text-muted">meurt</span></div>
           </div>
         </div>
       </div>
@@ -109,13 +109,13 @@ import Layout from '../layouts/Layout.astro';
     <div class="fade-in mb-24">
       <h2 class="text-3xl font-bold mb-8">Table de vérité complète</h2>
       <div class="overflow-x-auto">
-        <table class="w-full border border-[var(--color-border)] font-mono text-sm">
+        <table class="w-full border border-border font-mono text-sm">
           <thead>
-            <tr class="border-b border-[var(--color-border)] bg-[var(--color-surface)]/60">
-              <th class="text-left px-6 py-4 text-[var(--color-muted)] font-normal">État actuel</th>
-              <th class="text-left px-6 py-4 text-[var(--color-muted)] font-normal">Voisines vivantes</th>
-              <th class="text-left px-6 py-4 text-[var(--color-muted)] font-normal">État suivant</th>
-              <th class="text-left px-6 py-4 text-[var(--color-muted)] font-normal">Règle</th>
+            <tr class="border-b border-border bg-surface/60">
+              <th class="text-left px-6 py-4 text-muted font-normal">État actuel</th>
+              <th class="text-left px-6 py-4 text-muted font-normal">Voisines vivantes</th>
+              <th class="text-left px-6 py-4 text-muted font-normal">État suivant</th>
+              <th class="text-left px-6 py-4 text-muted font-normal">Règle</th>
             </tr>
           </thead>
           <tbody>
@@ -127,11 +127,11 @@ import Layout from '../layouts/Layout.astro';
               { etat: 'Vivante', voisines: '2, 3', suivant: 'Vivante', regle: 'Survie', accent: true },
               { etat: 'Vivante', voisines: '4, 5, 6, 7, 8', suivant: 'Morte', regle: 'Surpopulation', accent: false },
             ].map((row, i) => (
-              <tr class={`border-b border-[var(--color-border)] ${i % 2 === 0 ? '' : 'bg-[var(--color-surface)]/20'}`}>
-                <td class="px-6 py-3 text-[var(--color-muted)]">{row.etat}</td>
-                <td class="px-6 py-3 text-[var(--color-text)]">{row.voisines}</td>
-                <td class={`px-6 py-3 font-semibold ${row.accent ? 'text-[var(--color-accent)]' : 'text-[var(--color-muted)]'}`}>{row.suivant}</td>
-                <td class="px-6 py-3 text-[var(--color-muted)] text-xs uppercase tracking-wider">{row.regle}</td>
+              <tr class={`border-b border-border ${i % 2 === 0 ? '' : 'bg-surface/20'}`}>
+                <td class="px-6 py-3 text-muted">{row.etat}</td>
+                <td class="px-6 py-3 text-text">{row.voisines}</td>
+                <td class={`px-6 py-3 font-semibold ${row.accent ? 'text-accent' : 'text-muted'}`}>{row.suivant}</td>
+                <td class="px-6 py-3 text-muted text-xs uppercase tracking-wider">{row.regle}</td>
               </tr>
             ))}
           </tbody>
@@ -140,9 +140,9 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <!-- CTA -->
-    <div class="fade-in text-center border-t border-[var(--color-border)] pt-16">
-      <p class="text-[var(--color-muted)] mb-6">Prêt à voir ces règles à l'œuvre ?</p>
-      <a href="/jeu" class="group inline-flex items-center gap-3 bg-[var(--color-accent)] text-[var(--color-bg)] px-8 py-4 font-mono font-bold text-sm tracking-wide hover:bg-white transition-all duration-300 rounded-sm">
+    <div class="fade-in text-center border-t border-border pt-16">
+      <p class="text-muted mb-6">Prêt à voir ces règles à l'œuvre ?</p>
+      <a href="/jeu" class="group inline-flex items-center gap-3 bg-accent text-bg px-8 py-4 font-mono font-bold text-sm tracking-wide hover:bg-white transition-all duration-300 rounded-sm">
         Lancer la simulation
         <svg class="group-hover:translate-x-1 transition-transform duration-300" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -152,4 +152,5 @@ import Layout from '../layouts/Layout.astro';
 
   </section>
 </Layout>
+
 

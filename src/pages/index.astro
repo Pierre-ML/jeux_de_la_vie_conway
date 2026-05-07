@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import '../styles/home.css';
 ---
@@ -9,51 +9,51 @@ import '../styles/home.css';
   <section class="relative min-h-screen flex flex-col justify-center overflow-hidden">
 
     <canvas id="hero-bg" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
-    <div class="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-b from-transparent to-[#101010] pointer-events-none z-10"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-b from-transparent to-bg pointer-events-none z-10"></div>
 
-    <div class="relative z-20 px-6 pt-28 pb-20 max-w-[72rem] mx-auto w-full">
+    <div class="relative z-20 px-6 pt-28 pb-20 max-w-6xl mx-auto w-full">
 
       <div class="fade-in mb-6">
-        <span class="inline-flex items-center gap-2 font-mono text-[0.7rem] text-[var(--color-accent)] tracking-[0.15em] uppercase border border-[rgba(232,255,0,0.25)] px-3 py-1 rounded-sm">
-          <span class="w-[5px] h-[5px] rounded-full bg-[var(--color-accent)] [animation:pulse_2s_ease-in-out_infinite]"></span>
+        <span class="inline-flex items-center gap-2 font-mono text-xs text-accent tracking-widest uppercase border border-accent/25 px-3 py-1 rounded-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent badge-pulse"></span>
           Automate cellulaire · John Conway · 1970
         </span>
       </div>
 
-      <h1 class="text-[clamp(4rem,12vw,11rem)] font-black leading-[0.88] tracking-[-0.02em] mb-10 text-[var(--color-text)] fade-in fade-in-delay-1">
+      <h1 class="text-[clamp(4rem,12vw,11rem)] font-black leading-[0.88] tracking-tight mb-10 text-text fade-in fade-in-delay-1">
         Le Jeu<br />
-        <span class="text-[var(--color-accent)]">de la Vie</span>
+        <span class="text-accent">de la Vie</span>
       </h1>
 
-      <p class="text-[var(--color-muted)] text-[clamp(1rem,2vw,1.25rem)] max-w-[36rem] leading-[1.7] mb-12 font-light fade-in fade-in-delay-2">
+      <p class="text-muted text-base lg:text-xl max-w-xl leading-relaxed mb-12 font-light fade-in fade-in-delay-2">
         Un univers infini gouverné par quatre règles simples. Des cellules naissent,
         survivent et meurent — et de ce chaos émergent des structures d'une complexité stupéfiante.
       </p>
 
       <div class="flex flex-wrap gap-4 mb-20 fade-in fade-in-delay-3">
-        <a href="/jeu" class="inline-flex items-center gap-3 bg-[var(--color-accent)] text-[var(--color-bg)] px-8 py-[0.9rem] font-mono font-bold text-[0.8rem] tracking-[0.08em] no-underline rounded-sm transition-all duration-300 hover:bg-white hover:-translate-y-0.5">
+        <a href="/jeu" class="inline-flex items-center gap-3 bg-accent text-bg px-8 py-3.5 font-mono font-bold text-sm tracking-wider no-underline rounded-sm transition-all duration-300 hover:bg-white hover:-translate-y-0.5">
           Lancer la simulation
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a href="#regles" class="inline-flex items-center border border-[var(--color-border)] text-[var(--color-muted)] px-8 py-[0.9rem] font-mono text-[0.8rem] tracking-[0.08em] no-underline rounded-sm transition-all duration-300 hover:border-[var(--color-text)] hover:text-[var(--color-text)]">
+        <a href="#regles" class="inline-flex items-center border border-border text-muted px-8 py-3.5 font-mono text-sm tracking-wider no-underline rounded-sm transition-all duration-300 hover:border-text hover:text-text">
           Découvrir les règles
         </a>
       </div>
 
-      <div class="grid grid-cols-3 gap-8 border-t border-[var(--color-border)] pt-12 max-w-[36rem] fade-in fade-in-delay-4">
+      <div class="grid grid-cols-3 gap-8 border-t border-border pt-12 max-w-xl fade-in fade-in-delay-4">
         <div class="flex flex-col">
-          <span class="text-[clamp(2rem,5vw,3.5rem)] font-black text-[var(--color-text)] leading-none mb-1">4</span>
-          <span class="font-mono text-[0.65rem] text-[var(--color-muted)] uppercase tracking-[0.1em]">Règles</span>
+          <span class="text-[clamp(2rem,5vw,3.5rem)] font-black text-text leading-none mb-1">4</span>
+          <span class="font-mono text-xs text-muted uppercase tracking-widest">Règles</span>
         </div>
         <div class="flex flex-col">
-          <span class="text-[clamp(2rem,5vw,3.5rem)] font-black text-[var(--color-accent)] leading-none mb-1">∞</span>
-          <span class="font-mono text-[0.65rem] text-[var(--color-muted)] uppercase tracking-[0.1em]">Possibilités</span>
+          <span class="text-[clamp(2rem,5vw,3.5rem)] font-black text-accent leading-none mb-1">∞</span>
+          <span class="font-mono text-xs text-muted uppercase tracking-widest">Possibilités</span>
         </div>
         <div class="flex flex-col">
-          <span class="text-[clamp(2rem,5vw,3.5rem)] font-black text-[var(--color-text)] leading-none mb-1">1970</span>
-          <span class="font-mono text-[0.65rem] text-[var(--color-muted)] uppercase tracking-[0.1em]">Origine</span>
+          <span class="text-[clamp(2rem,5vw,3.5rem)] font-black text-text leading-none mb-1">1970</span>
+          <span class="font-mono text-xs text-muted uppercase tracking-widest">Origine</span>
         </div>
       </div>
 
@@ -61,18 +61,18 @@ import '../styles/home.css';
   </section>
 
   <!-- ═════════════════════════════════════════════════ RÈGLES -->
-  <section id="regles" class="py-32 px-6 max-w-[72rem] mx-auto">
+  <section id="regles" class="py-32 px-6 max-w-6xl mx-auto">
 
     <div class="mb-16 fade-in">
-      <span class="block font-mono text-[0.7rem] text-[var(--color-accent)] tracking-[0.15em] uppercase mb-4">01 — Les règles</span>
-      <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[1.05] tracking-[-0.02em]">Quatre lois<br />immuables</h2>
+      <span class="block font-mono text-xs text-accent tracking-widest uppercase mb-4">01 — Les règles</span>
+      <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[1.05] tracking-tight">Quatre lois<br />immuables</h2>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-px bg-[var(--color-border)]">
+    <div class="grid md:grid-cols-2 gap-px bg-border">
 
-      <div class="group bg-[var(--color-surface)] p-10 cursor-default transition-colors hover:bg-[#1f1f1f] fade-in fade-in-delay-1">
-        <div class="font-mono text-[0.65rem] text-[#444] tracking-[0.15em] uppercase mb-5 transition-colors group-hover:text-[var(--color-accent)]">01</div>
-        <div class="mb-6 opacity-[0.85]">
+      <div class="group bg-surface p-10 cursor-default transition-colors hover:bg-surface-hover fade-in fade-in-delay-1">
+        <div class="font-mono text-xs text-subtle tracking-widest uppercase mb-5 transition-colors group-hover:text-accent">01</div>
+        <div class="mb-6 opacity-85">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
             <circle cx="16" cy="16" r="6" fill="#e8ff00"/>
             <circle cx="7" cy="7" r="3" fill="rgba(232,255,0,0.3)"/>
@@ -81,16 +81,16 @@ import '../styles/home.css';
             <path d="M16 4v4M16 24v4M4 16h4M24 16h4" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.4"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-[var(--color-text)] mb-3">Naissance</h3>
-        <p class="text-[var(--color-muted)] text-[0.9rem] leading-[1.7] mb-5">
-          Une cellule <strong class="text-[var(--color-text)]">morte</strong> avec exactement <em class="text-[var(--color-accent)] not-italic font-semibold">3 voisines vivantes</em> devient vivante à la génération suivante.
+        <h3 class="text-xl font-bold text-text mb-3">Naissance</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">
+          Une cellule <strong class="text-text">morte</strong> avec exactement <em class="text-accent not-italic font-semibold">3 voisines vivantes</em> devient vivante à la génération suivante.
         </p>
-        <div class="font-mono text-[0.65rem] text-[#444] tracking-[0.08em] border-t border-[var(--color-border)] pt-4 transition-colors group-hover:text-[var(--color-accent)]">morte + 3 voisines → vivante</div>
+        <div class="font-mono text-xs text-subtle tracking-wider border-t border-border pt-4 transition-colors group-hover:text-accent">morte + 3 voisines → vivante</div>
       </div>
 
-      <div class="group bg-[var(--color-surface)] p-10 cursor-default transition-colors hover:bg-[#1f1f1f] fade-in fade-in-delay-2">
-        <div class="font-mono text-[0.65rem] text-[#444] tracking-[0.15em] uppercase mb-5 transition-colors group-hover:text-[var(--color-accent)]">02</div>
-        <div class="mb-6 opacity-[0.85]">
+      <div class="group bg-surface p-10 cursor-default transition-colors hover:bg-surface-hover fade-in fade-in-delay-2">
+        <div class="font-mono text-xs text-subtle tracking-widest uppercase mb-5 transition-colors group-hover:text-accent">02</div>
+        <div class="mb-6 opacity-85">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
             <circle cx="16" cy="16" r="6" fill="#e8ff00"/>
             <circle cx="7" cy="7" r="3" fill="rgba(232,255,0,0.3)"/>
@@ -98,16 +98,16 @@ import '../styles/home.css';
             <path d="M16 10 a6 6 0 0 1 0 12" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-[var(--color-text)] mb-3">Survie</h3>
-        <p class="text-[var(--color-muted)] text-[0.9rem] leading-[1.7] mb-5">
-          Une cellule <strong class="text-[var(--color-text)]">vivante</strong> avec <em class="text-[var(--color-accent)] not-italic font-semibold">2 ou 3 voisines</em> survit et reste en vie à la génération suivante.
+        <h3 class="text-xl font-bold text-text mb-3">Survie</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">
+          Une cellule <strong class="text-text">vivante</strong> avec <em class="text-accent not-italic font-semibold">2 ou 3 voisines</em> survit et reste en vie à la génération suivante.
         </p>
-        <div class="font-mono text-[0.65rem] text-[#444] tracking-[0.08em] border-t border-[var(--color-border)] pt-4 transition-colors group-hover:text-[var(--color-accent)]">vivante + 2–3 voisines → vivante</div>
+        <div class="font-mono text-xs text-subtle tracking-wider border-t border-border pt-4 transition-colors group-hover:text-accent">vivante + 2–3 voisines → vivante</div>
       </div>
 
-      <div class="group bg-[var(--color-surface)] p-10 cursor-default transition-colors hover:bg-[#1f1f1f] fade-in fade-in-delay-3">
-        <div class="font-mono text-[0.65rem] text-[#444] tracking-[0.15em] uppercase mb-5 transition-colors group-hover:text-[var(--color-accent)]">03</div>
-        <div class="mb-6 opacity-[0.85]">
+      <div class="group bg-surface p-10 cursor-default transition-colors hover:bg-surface-hover fade-in fade-in-delay-3">
+        <div class="font-mono text-xs text-subtle tracking-widest uppercase mb-5 transition-colors group-hover:text-accent">03</div>
+        <div class="mb-6 opacity-85">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
             <circle cx="16" cy="16" r="6" stroke="#e8ff00" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
             <circle cx="7" cy="7" r="3" fill="rgba(232,255,0,0.5)"/>
@@ -117,41 +117,41 @@ import '../styles/home.css';
             <path d="M12 12l8 8M20 12l-8 8" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.6"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-[var(--color-text)] mb-3">Surpopulation</h3>
-        <p class="text-[var(--color-muted)] text-[0.9rem] leading-[1.7] mb-5">
-          Une cellule <strong class="text-[var(--color-text)]">vivante</strong> avec <em class="text-[var(--color-accent)] not-italic font-semibold">plus de 3 voisines</em> meurt par surpopulation à la prochaine génération.
+        <h3 class="text-xl font-bold text-text mb-3">Surpopulation</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">
+          Une cellule <strong class="text-text">vivante</strong> avec <em class="text-accent not-italic font-semibold">plus de 3 voisines</em> meurt par surpopulation à la prochaine génération.
         </p>
-        <div class="font-mono text-[0.65rem] text-[#444] tracking-[0.08em] border-t border-[var(--color-border)] pt-4 transition-colors group-hover:text-[var(--color-accent)]">vivante + &gt;3 voisines → morte</div>
+        <div class="font-mono text-xs text-subtle tracking-wider border-t border-border pt-4 transition-colors group-hover:text-accent">vivante + &gt;3 voisines → morte</div>
       </div>
 
-      <div class="group bg-[var(--color-surface)] p-10 cursor-default transition-colors hover:bg-[#1f1f1f] fade-in fade-in-delay-4">
-        <div class="font-mono text-[0.65rem] text-[#444] tracking-[0.15em] uppercase mb-5 transition-colors group-hover:text-[var(--color-accent)]">04</div>
-        <div class="mb-6 opacity-[0.85]">
+      <div class="group bg-surface p-10 cursor-default transition-colors hover:bg-surface-hover fade-in fade-in-delay-4">
+        <div class="font-mono text-xs text-subtle tracking-widest uppercase mb-5 transition-colors group-hover:text-accent">04</div>
+        <div class="mb-6 opacity-85">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
             <circle cx="16" cy="16" r="6" stroke="#e8ff00" stroke-width="1.5" fill="none" stroke-dasharray="3 2"/>
             <circle cx="25" cy="7" r="3" fill="rgba(232,255,0,0.4)"/>
             <path d="M12 12l8 8M20 12l-8 8" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.6"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold text-[var(--color-text)] mb-3">Isolement</h3>
-        <p class="text-[var(--color-muted)] text-[0.9rem] leading-[1.7] mb-5">
-          Une cellule <strong class="text-[var(--color-text)]">vivante</strong> avec <em class="text-[var(--color-accent)] not-italic font-semibold">moins de 2 voisines</em> meurt d'isolement par sous-population.
+        <h3 class="text-xl font-bold text-text mb-3">Isolement</h3>
+        <p class="text-muted text-sm leading-relaxed mb-5">
+          Une cellule <strong class="text-text">vivante</strong> avec <em class="text-accent not-italic font-semibold">moins de 2 voisines</em> meurt d'isolement par sous-population.
         </p>
-        <div class="font-mono text-[0.65rem] text-[#444] tracking-[0.08em] border-t border-[var(--color-border)] pt-4 transition-colors group-hover:text-[var(--color-accent)]">vivante + &lt;2 voisines → morte</div>
+        <div class="font-mono text-xs text-subtle tracking-wider border-t border-border pt-4 transition-colors group-hover:text-accent">vivante + &lt;2 voisines → morte</div>
       </div>
 
     </div>
 
-    <div class="flex items-center gap-6 flex-wrap mt-12 px-8 py-6 border border-[var(--color-border)] bg-[var(--color-surface)] rounded-sm fade-in">
+    <div class="flex items-center gap-6 flex-wrap mt-12 px-8 py-6 border border-border bg-surface rounded-sm fade-in">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="flex-shrink-0">
         <circle cx="12" cy="12" r="10" stroke="#e8ff00" stroke-width="1.5"/>
         <path d="M12 8v4l3 3" stroke="#e8ff00" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
-      <p class="font-mono text-[0.75rem] text-[var(--color-muted)] leading-[1.6] flex-1">
-        Toutes les cellules évoluent <strong class="text-[var(--color-text)]">simultanément</strong> à chaque génération.
+      <p class="font-mono text-xs text-muted leading-relaxed flex-1">
+        Toutes les cellules évoluent <strong class="text-text">simultanément</strong> à chaque génération.
         L'état d'une cellule à la génération N+1 dépend uniquement de ses 8 voisines à la génération N.
       </p>
-      <a href="/regles" class="ml-auto font-mono text-[0.7rem] text-[var(--color-accent)] no-underline whitespace-nowrap tracking-[0.08em] flex-shrink-0 hover:underline">
+      <a href="/regles" class="ml-auto font-mono text-xs text-accent no-underline whitespace-nowrap tracking-wider flex-shrink-0 hover:underline">
         Règles détaillées →
       </a>
     </div>
@@ -159,32 +159,32 @@ import '../styles/home.css';
   </section>
 
   <!-- ═══════════════════════════════════════════════ HISTOIRE -->
-  <section id="histoire" class="py-32 px-6 border-t border-[var(--color-border)]">
-    <div class="max-w-[72rem] mx-auto">
+  <section id="histoire" class="py-32 px-6 border-t border-border">
+    <div class="max-w-6xl mx-auto">
 
       <div class="mb-16 fade-in">
-        <span class="block font-mono text-[0.7rem] text-[var(--color-accent)] tracking-[0.15em] uppercase mb-4">02 — Histoire</span>
-        <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[1.05] tracking-[-0.02em]">
+        <span class="block font-mono text-xs text-accent tracking-widest uppercase mb-4">02 — Histoire</span>
+        <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[1.05] tracking-tight">
           John Conway<br />
-          <span class="text-[var(--color-muted)] font-normal">1937 — 2020</span>
+          <span class="text-muted font-normal">1937 — 2020</span>
         </h2>
       </div>
 
       <div class="grid md:grid-cols-2 gap-16">
 
-        <div class="flex flex-col gap-5 text-[var(--color-muted)] leading-[1.8] text-[1.05rem] fade-in fade-in-delay-1">
+        <div class="flex flex-col gap-5 text-muted leading-relaxed text-base fade-in fade-in-delay-1">
           <p>John Horton Conway était un mathématicien britannique de renom, professeur à Cambridge puis à Princeton. Passionné par les jeux et les puzzles, il a révolutionné plusieurs domaines des mathématiques.</p>
-          <p>En <strong class="text-[var(--color-text)]">octobre 1970</strong>, il publie dans <em>Scientific American</em> son automate cellulaire baptisé <strong class="text-[var(--color-text)]">Game of Life</strong>. Conçu à partir d'un simple échiquier et de quatre règles, il fascine immédiatement la communauté scientifique et informatique mondiale.</p>
-          <p>Le jeu démontre qu'une <strong class="text-[var(--color-text)]">complexité infinie</strong> peut émerger de règles d'une simplicité absolue — un concept fondateur en informatique théorique.</p>
-          <a href="/histoire" class="inline-flex items-center gap-2 font-mono text-[0.75rem] text-[var(--color-accent)] no-underline tracking-[0.08em] mt-2 hover:underline">
+          <p>En <strong class="text-text">octobre 1970</strong>, il publie dans <em>Scientific American</em> son automate cellulaire baptisé <strong class="text-text">Game of Life</strong>. Conçu à partir d'un simple échiquier et de quatre règles, il fascine immédiatement la communauté scientifique et informatique mondiale.</p>
+          <p>Le jeu démontre qu'une <strong class="text-text">complexité infinie</strong> peut émerger de règles d'une simplicité absolue — un concept fondateur en informatique théorique.</p>
+          <a href="/histoire" class="inline-flex items-center gap-2 font-mono text-xs text-accent no-underline tracking-wider mt-2 hover:underline">
             Lire la biographie complète →
           </a>
         </div>
 
-        <div class="border border-[var(--color-border)] rounded-sm overflow-hidden fade-in fade-in-delay-2">
+        <div class="border border-border rounded-sm overflow-hidden fade-in fade-in-delay-2">
 
-          <div class="flex gap-5 p-7 items-start bg-[var(--color-surface)] hover:bg-[#1e1e1e] transition-colors">
-            <div class="w-10 h-10 flex-shrink-0 bg-[rgba(232,255,0,0.06)] border border-[rgba(232,255,0,0.15)] rounded-sm flex items-center justify-center">
+          <div class="flex gap-5 p-7 items-start bg-surface hover:bg-surface-hover transition-colors">
+            <div class="w-10 h-10 flex-shrink-0 bg-accent/5 border border-accent/15 rounded-sm flex items-center justify-center">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                 <rect x="2" y="2" width="7" height="7" stroke="#e8ff00" stroke-width="1.2"/>
                 <rect x="11" y="2" width="7" height="7" stroke="#e8ff00" stroke-width="1.2" fill="rgba(232,255,0,0.1)"/>
@@ -193,34 +193,34 @@ import '../styles/home.css';
               </svg>
             </div>
             <div>
-              <p class="font-bold text-[var(--color-text)] text-[0.95rem] mb-1">Turing-complet</p>
-              <p class="text-[var(--color-muted)] text-[0.82rem] leading-[1.65]">Le Game of Life peut simuler n'importe quel ordinateur. Il est capable de résoudre tout problème calculable, y compris sa propre simulation.</p>
+              <p class="font-bold text-text text-sm mb-1">Turing-complet</p>
+              <p class="text-muted text-sm leading-relaxed">Le Game of Life peut simuler n'importe quel ordinateur. Il est capable de résoudre tout problème calculable, y compris sa propre simulation.</p>
             </div>
           </div>
 
-          <div class="border-t border-[var(--color-border)] flex gap-5 p-7 items-start bg-[var(--color-surface)] hover:bg-[#1e1e1e] transition-colors">
-            <div class="w-10 h-10 flex-shrink-0 bg-[rgba(232,255,0,0.06)] border border-[rgba(232,255,0,0.15)] rounded-sm flex items-center justify-center">
+          <div class="border-t border-border flex gap-5 p-7 items-start bg-surface hover:bg-surface-hover transition-colors">
+            <div class="w-10 h-10 flex-shrink-0 bg-accent/5 border border-accent/15 rounded-sm flex items-center justify-center">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                 <circle cx="10" cy="10" r="8" stroke="#e8ff00" stroke-width="1.2"/>
                 <path d="M10 6v4l3 3" stroke="#e8ff00" stroke-width="1.2" stroke-linecap="round"/>
               </svg>
             </div>
             <div>
-              <p class="font-bold text-[var(--color-text)] text-[0.95rem] mb-1">Indécidable</p>
-              <p class="text-[var(--color-muted)] text-[0.82rem] leading-[1.65]">Malgré ses règles déterministes, il est mathématiquement impossible de prédire l'évolution d'un pattern arbitraire sans le simuler.</p>
+              <p class="font-bold text-text text-sm mb-1">Indécidable</p>
+              <p class="text-muted text-sm leading-relaxed">Malgré ses règles déterministes, il est mathématiquement impossible de prédire l'évolution d'un pattern arbitraire sans le simuler.</p>
             </div>
           </div>
 
-          <div class="border-t border-[var(--color-border)] flex gap-5 p-7 items-start bg-[var(--color-surface)] hover:bg-[#1e1e1e] transition-colors">
-            <div class="w-10 h-10 flex-shrink-0 bg-[rgba(232,255,0,0.06)] border border-[rgba(232,255,0,0.15)] rounded-sm flex items-center justify-center">
+          <div class="border-t border-border flex gap-5 p-7 items-start bg-surface hover:bg-surface-hover transition-colors">
+            <div class="w-10 h-10 flex-shrink-0 bg-accent/5 border border-accent/15 rounded-sm flex items-center justify-center">
               <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
                 <path d="M2 10h16M10 2v16" stroke="#e8ff00" stroke-width="1.2" stroke-linecap="round"/>
                 <circle cx="10" cy="10" r="3" stroke="#e8ff00" stroke-width="1.2"/>
               </svg>
             </div>
             <div>
-              <p class="font-bold text-[var(--color-text)] text-[0.95rem] mb-1">Grille infinie</p>
-              <p class="text-[var(--color-muted)] text-[0.82rem] leading-[1.65]">Théoriquement infinie dans toutes les directions — des patterns peuvent se propager indéfiniment, comme le Gosper Glider Gun.</p>
+              <p class="font-bold text-text text-sm mb-1">Grille infinie</p>
+              <p class="text-muted text-sm leading-relaxed">Théoriquement infinie dans toutes les directions — des patterns peuvent se propager indéfiniment, comme le Gosper Glider Gun.</p>
             </div>
           </div>
 
@@ -230,15 +230,15 @@ import '../styles/home.css';
   </section>
 
   <!-- ═══════════════════════════════════════════════ PATTERNS -->
-  <section id="patterns" class="py-32 px-6 border-t border-[var(--color-border)]">
-    <div class="max-w-[72rem] mx-auto">
+  <section id="patterns" class="py-32 px-6 border-t border-border">
+    <div class="max-w-6xl mx-auto">
 
       <div class="flex items-end justify-between flex-wrap gap-8 mb-16 fade-in">
         <div>
-          <span class="block font-mono text-[0.7rem] text-[var(--color-accent)] tracking-[0.15em] uppercase mb-4">03 — Patterns célèbres</span>
-          <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[1.05] tracking-[-0.02em]">Structures<br />remarquables</h2>
+          <span class="block font-mono text-xs text-accent tracking-widest uppercase mb-4">03 — Patterns célèbres</span>
+          <h2 class="text-[clamp(2.5rem,6vw,4.5rem)] font-black leading-[1.05] tracking-tight">Structures<br />remarquables</h2>
         </div>
-        <a href="/patterns" class="font-mono text-[0.75rem] text-[var(--color-muted)] no-underline tracking-[0.08em] pb-1 border-b border-[var(--color-border)] self-end transition-colors hover:text-[var(--color-text)] hover:border-[var(--color-text)]">
+        <a href="/patterns" class="font-mono text-xs text-muted no-underline tracking-wider pb-1 border-b border-border self-end transition-colors hover:text-text hover:border-text">
           Tous les patterns →
         </a>
       </div>
@@ -246,79 +246,79 @@ import '../styles/home.css';
       <div class="grid md:grid-cols-3 gap-4">
 
         <!-- Glider -->
-        <div class="border border-[var(--color-border)] bg-[var(--color-surface)] p-7 rounded-sm transition-all duration-300 hover:border-[rgba(232,255,0,0.3)] hover:-translate-y-1 fade-in fade-in-delay-1">
+        <div class="border border-border bg-surface p-7 rounded-sm transition-all duration-300 hover:border-accent/30 hover:-translate-y-1 fade-in fade-in-delay-1">
           <div class="flex items-center justify-between mb-5">
-            <span class="font-mono text-[0.6rem] text-[var(--color-accent)] tracking-[0.1em] uppercase border border-[rgba(232,255,0,0.25)] px-2 py-0.5 rounded-sm">Mobile</span>
-            <span class="font-mono text-[0.7rem] text-[#555] tracking-[0.1em]">GLIDER</span>
+            <span class="font-mono text-xs text-accent tracking-widest uppercase border border-accent/25 px-2 py-0.5 rounded-sm">Mobile</span>
+            <span class="font-mono text-xs text-subtle tracking-widest">GLIDER</span>
           </div>
-          <div class="grid gap-[3px] mb-5 bg-[var(--color-bg)] p-3 rounded-sm border border-[var(--color-border)] grid-cols-[repeat(var(--cols),1.25rem)]" style="--cols:3">
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+          <div class="grid gap-1 mb-5 bg-bg p-3 rounded-sm border border-border grid-cols-[repeat(var(--cols),1.25rem)]" style="--cols:3">
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
           </div>
-          <p class="text-[var(--color-muted)] text-[0.85rem] leading-[1.65] mb-4">Le plus célèbre des patterns mobiles. Se déplace en diagonale, se reproduisant toutes les 4 générations.</p>
-          <div class="font-mono text-[0.65rem] text-[var(--color-accent)] tracking-[0.08em]">5 cellules · Période 4</div>
+          <p class="text-muted text-sm leading-relaxed mb-4">Le plus célèbre des patterns mobiles. Se déplace en diagonale, se reproduisant toutes les 4 générations.</p>
+          <div class="font-mono text-xs text-accent tracking-wider">5 cellules · Période 4</div>
         </div>
 
         <!-- Blinker -->
-        <div class="border border-[var(--color-border)] bg-[var(--color-surface)] p-7 rounded-sm transition-all duration-300 hover:border-[rgba(232,255,0,0.3)] hover:-translate-y-1 fade-in fade-in-delay-2">
+        <div class="border border-border bg-surface p-7 rounded-sm transition-all duration-300 hover:border-accent/30 hover:-translate-y-1 fade-in fade-in-delay-2">
           <div class="flex items-center justify-between mb-5">
-            <span class="font-mono text-[0.6rem] text-[var(--color-accent)] tracking-[0.1em] uppercase border border-[rgba(232,255,0,0.25)] px-2 py-0.5 rounded-sm">Oscillateur</span>
-            <span class="font-mono text-[0.7rem] text-[#555] tracking-[0.1em]">BLINKER</span>
+            <span class="font-mono text-xs text-accent tracking-widest uppercase border border-accent/25 px-2 py-0.5 rounded-sm">Oscillateur</span>
+            <span class="font-mono text-xs text-subtle tracking-widest">BLINKER</span>
           </div>
-          <div class="grid gap-[3px] mb-5 bg-[var(--color-bg)] p-3 rounded-sm border border-[var(--color-border)] grid-cols-[repeat(var(--cols),1.25rem)]" style="--cols:3">
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
+          <div class="grid gap-1 mb-5 bg-bg p-3 rounded-sm border border-border grid-cols-[repeat(var(--cols),1.25rem)]" style="--cols:3">
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
           </div>
-          <p class="text-[var(--color-muted)] text-[0.85rem] leading-[1.65] mb-4">L'oscillateur le plus simple. Alterne entre une ligne horizontale et verticale de 3 cellules.</p>
-          <div class="font-mono text-[0.65rem] text-[var(--color-accent)] tracking-[0.08em]">3 cellules · Période 2</div>
+          <p class="text-muted text-sm leading-relaxed mb-4">L'oscillateur le plus simple. Alterne entre une ligne horizontale et verticale de 3 cellules.</p>
+          <div class="font-mono text-xs text-accent tracking-wider">3 cellules · Période 2</div>
         </div>
 
         <!-- Block -->
-        <div class="border border-[var(--color-border)] bg-[var(--color-surface)] p-7 rounded-sm transition-all duration-300 hover:border-[rgba(232,255,0,0.3)] hover:-translate-y-1 fade-in fade-in-delay-3">
+        <div class="border border-border bg-surface p-7 rounded-sm transition-all duration-300 hover:border-accent/30 hover:-translate-y-1 fade-in fade-in-delay-3">
           <div class="flex items-center justify-between mb-5">
-            <span class="font-mono text-[0.6rem] text-[var(--color-accent)] tracking-[0.1em] uppercase border border-[rgba(232,255,0,0.25)] px-2 py-0.5 rounded-sm">Still life</span>
-            <span class="font-mono text-[0.7rem] text-[#555] tracking-[0.1em]">BLOCK</span>
+            <span class="font-mono text-xs text-accent tracking-widest uppercase border border-accent/25 px-2 py-0.5 rounded-sm">Still life</span>
+            <span class="font-mono text-xs text-subtle tracking-widest">BLOCK</span>
           </div>
-          <div class="grid gap-[3px] mb-5 bg-[var(--color-bg)] p-3 rounded-sm border border-[var(--color-border)] grid-cols-[repeat(var(--cols),1.25rem)]" style="--cols:4">
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 bg-[var(--color-accent)] rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
-            <div class="w-5 h-5 border border-[rgba(255,255,255,0.05)] rounded-sm"></div>
+          <div class="grid gap-1 mb-5 bg-bg p-3 rounded-sm border border-border grid-cols-[repeat(var(--cols),1.25rem)]" style="--cols:4">
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 bg-accent rounded-sm shadow-[0_0_6px_rgba(232,255,0,0.4)]"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
+            <div class="w-5 h-5 border border-white/5 rounded-sm"></div>
           </div>
-          <p class="text-[var(--color-muted)] text-[0.85rem] leading-[1.65] mb-4">La structure stable la plus simple. Un carré 2×2 qui reste identique à travers les générations.</p>
-          <div class="font-mono text-[0.65rem] text-[var(--color-accent)] tracking-[0.08em]">4 cellules · Stable</div>
+          <p class="text-muted text-sm leading-relaxed mb-4">La structure stable la plus simple. Un carré 2×2 qui reste identique à travers les générations.</p>
+          <div class="font-mono text-xs text-accent tracking-wider">4 cellules · Stable</div>
         </div>
 
       </div>
 
       <div class="mt-16 text-center fade-in">
-        <a href="/jeu" class="inline-flex items-center gap-3 bg-[var(--color-accent)] text-[var(--color-bg)] px-10 py-4 font-mono font-bold text-[0.85rem] tracking-[0.08em] no-underline rounded-sm transition-all duration-300 hover:bg-white hover:-translate-y-0.5">
+        <a href="/jeu" class="inline-flex items-center gap-3 bg-accent text-bg px-10 py-4 font-mono font-bold text-sm tracking-wider no-underline rounded-sm transition-all duration-300 hover:bg-white hover:-translate-y-0.5">
           Explorer la simulation
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -334,3 +334,4 @@ import '../styles/home.css';
 <script>
   import '../js/home-bg.js';
 </script>
+
