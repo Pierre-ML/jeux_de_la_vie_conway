@@ -1,0 +1,6 @@
+/* Uniquement ce que Tailwind ne peut pas gérer */
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}

@@ -9,9 +9,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "node deploy.js"
   },
   "dependencies": {
+    "@astrojs/node": "^10.0.6",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.2.2",
     "tailwindcss": "^4.2.4"

@@ -1,9 +1,9 @@
----
-import BaseLayout from '../layouts/BaseLayout.astro';
+﻿---
+import Layout from '../layouts/Layout.astro';
 import GameOfLife from '../components/GameOfLife.astro';
 ---
 
-<BaseLayout
+<Layout
   title="Simulation — Le Jeu de la Vie"
   description="Simulateur interactif du Jeu de la Vie de John Conway"
   page="game"
@@ -12,10 +12,11 @@ import GameOfLife from '../components/GameOfLife.astro';
   <div style="padding-top:4rem; height:100vh; overflow:hidden; background:#101010;">
     <GameOfLife />
   </div>
-</BaseLayout>
+</Layout>
 
 <style>
   body {
     overflow: hidden;
   }
 </style>
+

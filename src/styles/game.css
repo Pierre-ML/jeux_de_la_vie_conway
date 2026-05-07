@@ -1,0 +1,26 @@
+/* Uniquement ce que Tailwind ne peut pas gérer */
+
+/* Bouton HUD — hover géré en CSS car Tailwind scoped ne s'applique pas depuis le JS */
+.hud-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid #2a2a2a;
+  background: #1a1a1a;
+  color: #f0f0f0;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, color 0.2s;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.hud-btn:hover {
+  border-color: #e8ff00;
+  color: #e8ff00;
+}
+
+/* Tooltip affiché via JS (.visible ajouté dynamiquement) */
+#nav-tooltip.visible { opacity: 1; }
